@@ -1,6 +1,10 @@
 #include "Adder.h"
 
-#include "data_structure.h"
+#include "DataStructure.h"
+
+Adder::Adder(DataBase* dataBase) {
+	m_dataBase = dataBase;
+}
 
 void Adder::Add(string employeeNum, string name, string cl, string phoneNum, string birthday, string certi) {
 	Employee employee;
@@ -11,16 +15,7 @@ void Adder::Add(string employeeNum, string name, string cl, string phoneNum, str
 	employee.phoneNum = phoneNum;
 	employee.birthday = birthday;
 	employee.certi = certi;
-	employee.valid = 1;
+	employee.valid = true;
 
-	memberList[currentIndex] = employee;
-
-	employeeNum_map.insert({ employeeNum, currentIndex });
-	name_map.insert({ name, currentIndex });
-	cl_map.insert({ cl, currentIndex });
-	phoneNum_map.insert({ phoneNum, currentIndex });
-	birthday_map.insert({ birthday, currentIndex });
-	certi_map.insert({ certi, currentIndex });
-
-	currentIndex++;
+	m_dataBase->CreateRecord(employee);
 }

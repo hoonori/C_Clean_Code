@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="pch.cpp" />
+    <ClCompile Include="AdderTest.cpp">
+      <Filter>Test</Filter>
+    </ClCompile>
+    <ClCompile Include="DeleterTest.cpp">
+      <Filter>Test</Filter>
+    </ClCompile>
+    <ClCompile Include="ModifierTest.cpp">
+      <Filter>Test</Filter>
+    </ClCompile>
+    <ClCompile Include="ParserTest.cpp">
+      <Filter>Test</Filter>
+    </ClCompile>
+    <ClCompile Include="SearcherTest.cpp">
+      <Filter>Test</Filter>
+    </ClCompile>
+    <ClCompile Include="DataBaseTest.cpp">
+      <Filter>Test</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="pch.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Test">
+      <UniqueIdentifier>{07f9b199-1428-473e-a180-a6d71dbd6ecb}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

@@ -24,15 +24,39 @@
     <ClCompile Include="Adder.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="Deleter.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Searcher.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Modifier.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="DataBase.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Parser.h">
-      <Filter>소스 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="data_structure.h">
+    <ClInclude Include="DataStructure.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Adder.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Parser.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Deleter.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Searcher.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Modifier.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="DataBase.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>

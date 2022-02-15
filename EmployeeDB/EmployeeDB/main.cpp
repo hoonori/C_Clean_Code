@@ -6,7 +6,10 @@
 #include <string>
 
 #include "Parser.h"
-
+#include "Adder.h"
+#include "Deleter.h"
+#include "Searcher.h"
+#include "Modifier.h"
 
 int main(int argc, char* argv[]) {
 
@@ -18,14 +21,19 @@ int main(int argc, char* argv[]) {
 	ifs.open(inputFileName);
 	ofs.open(outputFileName);
 
-	Parser parser;
+	Parser* parser = new Parser;
+	DataBase* database = new DataBase();
+	Adder* adder = new Adder(database);
+	Deleter* deleter = new Deleter(database);
+	Searcher* searcher = new Searcher(database);
+	Modifier* modifier = new Modifier(database);
 
 	if (!ifs.fail()) {
 		string line;
 		while (getline(ifs, line)) {
 			cout << line << endl;
 
-			int functionIndex = parser.Parse(line);
+			int functionIndex = parser->Parse(line);
 
 			switch (functionIndex) {
 			case 0:
