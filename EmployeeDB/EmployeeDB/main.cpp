@@ -5,7 +5,6 @@
 #include <sstream>
 #include <string>
 
-#include "main.h"
 #include "Parser.h"
 
 
