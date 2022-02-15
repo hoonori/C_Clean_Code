@@ -15,5 +15,5 @@ TEST(AdderTest, AddTest) {
 
 	adder->Add(employeeNum, name, cl, phoneNum, birthday, certi);
 
-	EXPECT_TRUE(false);
+	EXPECT_EQ(true, db->ReadRecord(0).valid);
 }

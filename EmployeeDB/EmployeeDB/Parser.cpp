@@ -3,8 +3,8 @@
 
 #include "Parser.h"
 
-int Parser::Parse(string line) {
-	
+void Parser::Parse(string line, OUT CmdPacket& cmdPacket) {
+
 	char token = ',';
 	stringstream sstream(line);
 
@@ -14,24 +14,39 @@ int Parser::Parse(string line) {
 	while (getline(sstream, word, token)) {
 
 		if (wordIndex == 0) {
-			if (word.compare("ADD") == 0) {
-				functionIndex = 0;
-			}
-			else if (word.compare("DEL") == 0) {
-				functionIndex = 1;
-			}
-			else if (word.compare("SCH") == 0) {
-				functionIndex = 2;
-			}
-			else if (word.compare("MOD") == 0) {
-				functionIndex = 3;
-			}
-			else {
-				cout << "Fail" << endl;
-			}
+			cmdPacket.cmd = word;
 		}
+		else if (wordIndex == 1) {
+			cmdPacket.option1 = word;
+		}
+		else if (wordIndex == 2) {
+			cmdPacket.option2 = word;
+		}
+		else if (wordIndex == 3) {
+			cmdPacket.option3 = word;
+		}
+		else if (wordIndex == 4) {
+			cmdPacket.data1 = word;
+		}
+		else if (wordIndex == 5) {
+			cmdPacket.data2 = word;
+		}
+		else if (wordIndex == 6) {
+			cmdPacket.data3 = word;
+		}
+		else if (wordIndex == 7) {
+			cmdPacket.data4 = word;
+		}
+		else if (wordIndex == 8) {
+			cmdPacket.data5 = word;
+		}
+		else if (wordIndex == 9) {
+			cmdPacket.data6 = word;
+		}
+		else {
+			cout << "[Fail] intput data format error" << endl;
+		}
+
 		wordIndex++;
 	}
-
-	return functionIndex;
 }
