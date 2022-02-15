@@ -27,8 +27,7 @@ int Parser::Parse(string line) {
 				functionIndex = 3;
 			}
 			else {
-				cout << "[Fail] wrong Cmd" << endl;
-				break;
+				cout << "Fail" << endl;
 			}
 		}
 		wordIndex++;

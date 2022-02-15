@@ -1,7 +1,5 @@
 #include "pch.h"
-#include "../EmployeeDB/Adder.cpp"
 #include "../EmployeeDB/Adder.h"
-#include "../EmployeeDB/DataBase.cpp"
 #include "../EmployeeDB/DataBase.h"
 
 TEST(AdderTest, AddTest) {

@@ -10,19 +10,19 @@ class DataBase
 public:
 	void CreateRecord(Employee employee);
 	Employee ReadRecord(int index);
-	void UpdateRecord(int index, Employee employee);
+	void UpdateRecord(int index, string data, KeyType keyType);
 	void DeleteRecord(int index);
 
-	vector<int> FindAll(KeyType keyType, string key);
+	vector<int> FindMapAll(KeyType keyType, string key);
 private:
-	struct Employee memberList[100000];
+	struct Employee m_memberList[100000];
 
-	multimap<string, int> employeeNum_map;
-	multimap<string, int> name_map;
-	multimap<string, int> cl_map;
-	multimap<string, int> phoneNum_map;
-	multimap<string, int> birthday_map;
-	multimap<string, int> certi_map;
+	multimap<string, int> m_employeeNumMap;
+	multimap<string, int> m_nameMap;
+	multimap<string, int> m_clMap;
+	multimap<string, int> m_phoneNumMap;
+	multimap<string, int> m_birthdayMap;
+	multimap<string, int> m_certiMap;
 
 	int currentIndex = 0;
 };
