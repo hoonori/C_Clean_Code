@@ -3,6 +3,19 @@
 #include <string>
 using namespace std;
 
+
+struct Employee {
+	int valid;
+	string employeeNum;
+	string name;
+	string cl;
+	string phoneNum;
+	string birthday;
+	string certi;
+};
+
+
+
 struct Employee memberList[100000];
 
 multimap<string, int> employeeNum_map;

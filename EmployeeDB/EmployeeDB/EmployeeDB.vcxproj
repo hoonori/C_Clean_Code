@@ -144,7 +144,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="data_structure.h" />
-    <ClInclude Include="main.h" />
     <ClInclude Include="Parser.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
