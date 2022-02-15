@@ -1,9 +1,7 @@
 #include <stdio.h>
-#include <vector>
 #include <iostream>
 #include <fstream>
 #include <sstream>
-#include <string>
 
 #include "main.h"
 #include "Parser.h"

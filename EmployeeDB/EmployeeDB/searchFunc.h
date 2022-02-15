@@ -1,9 +1,9 @@
 #pragma once
-class searchFunc {
-public :
-	searchFunc();
-	~searchFunc();
+#include <string>
+using namespace std;
 
-	int a = 0;
-	int test();
+class searchFunc {
+public:
+
+	int Search(string type, string data);
 };

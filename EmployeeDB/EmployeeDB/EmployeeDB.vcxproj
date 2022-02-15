@@ -141,11 +141,13 @@
   <ItemGroup>
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Parser.cpp" />
+    <ClCompile Include="searchFunc.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="data_structure.h" />
     <ClInclude Include="main.h" />
     <ClInclude Include="Parser.h" />
+    <ClInclude Include="searchFunc.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
