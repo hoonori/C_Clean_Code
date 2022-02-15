@@ -36,7 +36,7 @@ TEST(TestCaseName, DelTest) {
 		memberList[i] = list[i];
 		employeeNum_map.insert({ list[i].employeeNum, i });
 		name_map.insert({list[i].name, i});
-		cl_map.insert({ list[i].birthday, i });
+		cl_map.insert({ list[i].cl, i });
 		phoneNum_map.insert({list[i].phoneNum, i});
 		birthday_map.insert({ list[i].birthday, i });
 		certi_map.insert({list[i].certi, i});
