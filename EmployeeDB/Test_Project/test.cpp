@@ -30,5 +30,31 @@ TEST(TestCaseName, AddTest) {
 
 	adder.Add(employeeNum, name, cl, phoneNum, birthday, certi);
 
-	EXPECT_TRUE(false);
+	Employee employee = memberList[currentIndex - 1];
+
+	EXPECT_EQ(1, employee.valid);
+	EXPECT_EQ(0, employeeNum.compare(employee.employeeNum));
+	EXPECT_EQ(0, name.compare(employee.name));
+	EXPECT_EQ(0, cl.compare(employee.cl));
+	EXPECT_EQ(0, phoneNum.compare(employee.phoneNum));
+	EXPECT_EQ(0, birthday.compare(employee.birthday));
+	EXPECT_EQ(0, certi.compare(employee.certi));
+
+	auto iter = employeeNum_map.find(employeeNum);
+	EXPECT_TRUE(iter != employeeNum_map.end());
+
+	iter = name_map.find(name);
+	EXPECT_TRUE(iter != name_map.end());
+
+	iter = cl_map.find(cl);
+	EXPECT_TRUE(iter != cl_map.end());
+
+	iter = phoneNum_map.find(phoneNum);
+	EXPECT_TRUE(iter != phoneNum_map.end());
+
+	iter = birthday_map.find(birthday);
+	EXPECT_TRUE(iter != birthday_map.end());
+
+	iter = certi_map.find(certi);
+	EXPECT_TRUE(iter != certi_map.end());
 }
