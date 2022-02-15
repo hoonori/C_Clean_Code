@@ -141,6 +141,7 @@
   <ItemGroup>
     <ClCompile Include="Adder.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Mod.cpp" />
     <ClCompile Include="Parser.cpp" />
   </ItemGroup>
   <ItemGroup>

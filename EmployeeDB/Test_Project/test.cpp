@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "../EmployeeDB/Parser.cpp"
 #include "../EmployeeDB/Adder.cpp"
+#include "../EmployeeDB/Mod.cpp"
 #include"../EmployeeDB/data_structure.h"
 /*
 TEST(TestCaseName, TestName) {
@@ -57,4 +58,43 @@ TEST(TestCaseName, AddTest) {
 
 	iter = certi_map.find(certi);
 	EXPECT_TRUE(iter != certi_map.end());
+}
+
+TEST(TestCaseName, ModTest) {
+	Adder adder;
+
+	string employeeNum = "15123099";
+	string name = "VXIHXOTH JHOP";
+	string cl = "CL3";
+	string phoneNum = "010 - 3112 - 2609";
+	string birthday = "19771211";
+	string certi = "ADV";
+
+	adder.Add(employeeNum, name, cl, phoneNum, birthday, certi);
+
+	employeeNum = "15123012";
+	name = "ABCD";;
+	cl = "CL3";
+	phoneNum = "010 - 3112 - 2609";
+	birthday = "19771222";
+	certi = "ADV";
+
+	adder.Add(employeeNum, name, cl, phoneNum, birthday, certi);
+
+	employeeNum = "12344442";
+	name = "VXIHXOTH JHOP";;
+	cl = "CL1";
+	phoneNum = "010 - 1234 - 2609";
+	birthday = "12341211";
+	certi = "EX";
+
+	adder.Add(employeeNum, name, cl, phoneNum, birthday, certi);
+
+	MOD(NAME, "VXIHXOTH JHOP", CERTI, "PRO");
+	EXPECT_EQ(memberList[0].certi, "PRO");
+	EXPECT_EQ(memberList[2].certi, "PRO");
+
+	MOD(BIRTHDAY, "12341211", CL, "CL4");
+	EXPECT_EQ(memberList[2].cl, "CL4");
+
 }

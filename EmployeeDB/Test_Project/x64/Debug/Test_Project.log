@@ -1,2 +1,1 @@
-﻿  test.cpp
-  Test_Project.vcxproj -> C:\Users\yoonj\OneDrive\문서\C_Clean_Code\addMerge2\EmployeeDB\x64\Debug\Test_Project.exe
+﻿C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppClean.targets(77,5): warning : 'c:\users\noh02\desktop\과제\c_clean_code\employeedb\test_project\x64\debug\test_project.pch' 파일은 다른 프로세스에서 사용 중이므로 프로세스에서 액세스할 수 없습니다.
