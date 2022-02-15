@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<GtaTestDurations xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Executable>C:\Users\yoonj\OneDrive\문서\C_Clean_Code\addMerge2\EmployeeDB\x64\Debug\Test_Project.exe</Executable>
+  <TestDurations>
+    <TestDuration Test="TestCaseName.ParseTest" Duration="1" />
+    <TestDuration Test="TestCaseName.AddTest" Duration="1" />
+  </TestDurations>
+</GtaTestDurations>
