@@ -41,8 +41,8 @@ TEST(ModifierTest, ModTest) {
 	EXPECT_EQ("21001101", db->ReadRecord(1).birthday);
 
 	modifier->Modify(KeyType::Name, "VXIHXOTH", KeyType::Certi, "ADV", NULL, '-f', NULL);
-	EXPECT_EQ("ADV", db->ReadRecord(0).birthday);
-	EXPECT_EQ("ADV", db->ReadRecord(1).birthday);
+	EXPECT_EQ("ADV", db->ReadRecord(0).certi);
+	EXPECT_EQ("ADV", db->ReadRecord(1).certi);
 
 
 }
