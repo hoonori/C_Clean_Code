@@ -6,7 +6,10 @@
 #include <string>
 
 #include "Parser.h"
-
+#include "Adder.h"
+#include "Deleter.h"
+#include "Searcher.h"
+#include "Modifier.h"
 
 int main(int argc, char* argv[]) {
 
@@ -18,27 +21,41 @@ int main(int argc, char* argv[]) {
 	ifs.open(inputFileName);
 	ofs.open(outputFileName);
 
-	Parser parser;
+	Parser* parser = new Parser;
+	DataBase* database = new DataBase();
+	Adder* adder = new Adder(database);
+	Deleter* deleter = new Deleter(database);
+	Searcher* searcher = new Searcher(database);
+	Modifier* modifier = new Modifier(database);
 
 	if (!ifs.fail()) {
 		string line;
 		while (getline(ifs, line)) {
 			cout << line << endl;
+			CmdPacket cmdPacket;
+			parser->Parse(line, cmdPacket);
 
-			int functionIndex = parser.Parse(line);
+			if (cmdPacket.cmd.compare("ADD") == 0) {
+				string employNum = cmdPacket.data1;
+				string name = cmdPacket.data2;
+				string cl = cmdPacket.data3;
+				string phoneNumber = cmdPacket.data4;
+				string birthday = cmdPacket.data5;
+				string certi = cmdPacket.data6;
 
-			switch (functionIndex) {
-			case 0:
-				// do Add function
-				break;
-			case 1:
-				// do DEL function
-				break;
-			case 2:
-				// do SCH function
-				break;
-			case 3:
-				// do MOD function
+				adder->Add(employNum, name, cl, phoneNumber, birthday, certi);
+			}
+			else if (cmdPacket.cmd.compare("DEL") == 0) {
+
+			}
+			else if (cmdPacket.cmd.compare("SCH") == 0) {
+
+			}
+			else if (cmdPacket.cmd.compare("MOD") == 0) {
+
+			}
+			else {
+				cout << "[Fail] wrong command input" << endl;
 				break;
 			}
 		}
