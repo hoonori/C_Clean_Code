@@ -185,3 +185,9 @@ void Parser::SortEmployee(OUT vector<Employee>& employVec) {
 	sort(employVec.begin(), employVec.end(), compare);
 }
 
+KeyType Parser::TranslateKeyType(string keyname) {
+	KeyType keyType = KeyType::EmployeeNum;
+
+	return keyType;
+}
+

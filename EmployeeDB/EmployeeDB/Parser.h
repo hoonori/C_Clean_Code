@@ -15,7 +15,7 @@ public:
 	static void ParseBirthDay(string birthDay, OUT string& year, OUT string& month, OUT string& day);
 	static OptionType ParseOption(string option);
 	static void SortEmployee(OUT vector<Employee>& employVec);
-
+	static KeyType TranslateKeyType(string keyname);
 private:
 };
 
