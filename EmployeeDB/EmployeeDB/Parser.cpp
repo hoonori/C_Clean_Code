@@ -1,7 +1,42 @@
 #include <sstream>
 #include <iostream>
+#include <algorithm>
 
 #include "Parser.h"
+
+bool compare(Employee a, Employee b) {
+	int a_employeeNum = stoi(a.employeeNum);
+	int b_employeeNum = stoi(b.employeeNum);
+
+	bool greator;
+
+	constexpr int YOUNGEST_EMPLOYEE_NUM = 21999999;
+	constexpr int OLDEST_EMPLOYEE_NUM = 69000000;
+
+	
+	// case 1 : if both are before 2000s, smaller integer is older
+	if (a_employeeNum >= OLDEST_EMPLOYEE_NUM && b_employeeNum >= OLDEST_EMPLOYEE_NUM) {
+		greator = a_employeeNum < b_employeeNum;
+	}
+	// case 2 : if both are after 2000s, smaller integer is older
+	else if (a_employeeNum <= YOUNGEST_EMPLOYEE_NUM && b_employeeNum <= YOUNGEST_EMPLOYEE_NUM) {
+		greator = a_employeeNum < b_employeeNum;
+	}
+	// case 3 : if a is after 2000s, and b is before 2000s, b is older
+	else if (a_employeeNum <= YOUNGEST_EMPLOYEE_NUM && b_employeeNum >= OLDEST_EMPLOYEE_NUM) {
+		greator = false;
+	}
+	// case 4 : if a is before 2000s, and b is after 2000s, a is older
+	else if (a_employeeNum >= OLDEST_EMPLOYEE_NUM && b_employeeNum <= YOUNGEST_EMPLOYEE_NUM) {
+		greator = true;
+	}
+	else {
+		cout << "[Fail] wrong EmployNum Range" << endl;
+	}
+
+	return greator;
+}
+
 
 void Parser::ParseCmdLine(string line, OUT CmdPacket& cmdPacket) {
 
@@ -145,3 +180,8 @@ OptionType Parser::ParseOption(string option) {
 
 	return optionType;
 }
+
+void Parser::SortEmployee(vector<Employee>& employVec) {
+	sort(employVec.begin(), employVec.end(), compare);
+}
+
