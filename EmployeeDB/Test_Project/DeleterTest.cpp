@@ -4,7 +4,7 @@
 
 
 
-TEST(TestCaseName, DelTest) {
+TEST(DeleteTest, BasicTest) {
 	DataBase* database = new DataBase();
 	Deleter deleter(database);
 
@@ -22,11 +22,11 @@ TEST(TestCaseName, DelTest) {
 		database->CreateRecord(list[i]);
 	}
 	
-	EXPECT_EQ(deleter.Delete(0,0,0, list[0].employeeNum), 1);
-	EXPECT_EQ(deleter.Delete(0,0,1, list[1].name), 1);
-	EXPECT_EQ(deleter.Delete(0,0,2, list[2].cl), 1);
-	EXPECT_EQ(deleter.Delete(0,0,3, list[3].phoneNum), 1);
-	EXPECT_EQ(deleter.Delete(0,0,4, list[4].birthday), 1);
-	EXPECT_EQ(deleter.Delete(0,0,5, list[5].certi), 1);
+	EXPECT_EQ(deleter.Delete(0,0,KeyType::EmployeeNum, list[0].employeeNum), 1);
+	EXPECT_EQ(deleter.Delete(0,0, KeyType::Name, list[1].name), 1);
+	EXPECT_EQ(deleter.Delete(0,0, KeyType::Cl, list[2].cl), 1);
+	EXPECT_EQ(deleter.Delete(0,0, KeyType::PhoneNum, list[3].phoneNum), 1);
+	EXPECT_EQ(deleter.Delete(0,0, KeyType::Birthday, list[4].birthday), 1);
+	EXPECT_EQ(deleter.Delete(0,0, KeyType::Certi, list[5].certi), 1);
 	
 }
