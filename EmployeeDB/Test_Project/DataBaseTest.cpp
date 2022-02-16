@@ -9,7 +9,7 @@ TEST(DataBaseTest, ReadTest) {
 	employee1.employeeNum = "15123099";
 	employee1.name = "VXIHXOTH JHOP";
 	employee1.cl = "CL3";
-	employee1.phoneNum = "010 - 3112 - 2609";
+	employee1.phoneNum = "010-3112-2609";
 	employee1.birthday = "19771211";
 	employee1.certi = "ADV";
 	employee1.valid = true;
@@ -19,7 +19,7 @@ TEST(DataBaseTest, ReadTest) {
 	employee2.employeeNum = "17112609";
 	employee2.name = "FB NTAWR";
 	employee2.cl = "CL4";
-	employee2.phoneNum = "010 - 5645 - 6122";
+	employee2.phoneNum = "010-5645-6122";
 	employee2.birthday = "19861203";
 	employee2.certi = "PRO";
 	employee2.valid = true;
@@ -32,7 +32,7 @@ TEST(DataBaseTest, ReadTest) {
 	Employee res3 = database->ReadRecord(2);
 
 	EXPECT_EQ(0, res1.employeeNum.compare("15123099"));
-	EXPECT_EQ(0, res2.phoneNum.compare("010 - 5645 - 6122"));
+	EXPECT_EQ(0, res2.phoneNum.compare("010-5645-6122"));
 	EXPECT_FALSE(res3.valid);
 }
 TEST(DataBaseTest, UpdateTest) {
@@ -44,7 +44,7 @@ TEST(DataBaseTest, UpdateTest) {
 	employee.employeeNum = "15123099";
 	employee.name = "VXIHXOTH JHOP";
 	employee.cl = "CL3";
-	employee.phoneNum = "010 - 3112 - 2609";
+	employee.phoneNum = "010-3112-2609";
 	employee.birthday = "19771211";
 	employee.certi = "ADV";
 	employee.valid = true;
@@ -71,7 +71,7 @@ TEST(DataBaseTest, DeleteTest) {
 	employee.employeeNum = "15123099";
 	employee.name = "VXIHXOTH JHOP";
 	employee.cl = "CL3";
-	employee.phoneNum = "010 - 3112 - 2609";
+	employee.phoneNum = "010-3112-2609";
 	employee.birthday = "19771211";
 	employee.certi = "ADV";
 	employee.valid = true;
@@ -95,7 +95,7 @@ TEST(DataBaseTest, FindAllTest) {
 	employee1.employeeNum = "15123099";
 	employee1.name = "VXIHXOTH JHOP";
 	employee1.cl = "CL3";
-	employee1.phoneNum = "010 - 3112 - 2609";
+	employee1.phoneNum = "010-3112-2609";
 	employee1.birthday = "19771211";
 	employee1.certi = "ADV";
 	employee1.valid = true;
@@ -105,7 +105,7 @@ TEST(DataBaseTest, FindAllTest) {
 	employee2.employeeNum = "17112609";
 	employee2.name = "FB NTAWR";
 	employee2.cl = "CL4";
-	employee2.phoneNum = "010 - 5645 - 6122";
+	employee2.phoneNum = "010-5645-6122";
 	employee2.birthday = "19861203";
 	employee2.certi = "PRO";
 	employee2.valid = true;
@@ -137,7 +137,7 @@ TEST(DataBaseTest, OptionDataTest) {
 	employee1.employeeNum = "15123099";
 	employee1.name = "VXIHXOTH JHOP";
 	employee1.cl = "CL3";
-	employee1.phoneNum = "010 - 3112 - 2609";
+	employee1.phoneNum = "010-3112-2609";
 	employee1.birthday = "19771211";
 	employee1.certi = "ADV";
 	employee1.valid = true;
@@ -155,7 +155,7 @@ TEST(DataBaseTest, OptionDataTest) {
 	employee2.employeeNum = "17112609";
 	employee2.name = "FB NTAWR";
 	employee2.cl = "CL4";
-	employee2.phoneNum = "010 - 5645 - 6122";
+	employee2.phoneNum = "010-5645-6122";
 	employee2.birthday = "19861203";
 	employee2.certi = "PRO";
 	employee2.valid = true;
