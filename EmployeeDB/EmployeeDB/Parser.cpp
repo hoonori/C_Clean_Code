@@ -181,7 +181,7 @@ OptionType Parser::ParseOption(string option) {
 	return optionType;
 }
 
-void Parser::SortEmployee(vector<Employee>& employVec) {
+void Parser::SortEmployee(OUT vector<Employee>& employVec) {
 	sort(employVec.begin(), employVec.end(), compare);
 }
 
