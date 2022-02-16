@@ -10,6 +10,15 @@ void DataBase::CreateRecord(Employee employee) {
 	m_birthdayMap.insert({ employee.birthday, currentIndex });
 	m_certiMap.insert({ employee.certi, currentIndex });
 
+	m_firstNameMap.insert({ employee.firstName, currentIndex });
+	m_lastNameMap.insert({ employee.lastName, currentIndex });
+	m_middlePhoneNumMap.insert({ employee.middlePhoneNum, currentIndex });
+	m_lastPhoneNumMap.insert({ employee.lastPhoneNum, currentIndex });
+
+	m_yearBirthMap.insert({ employee.yearBirth, currentIndex });
+	m_monthBirthMap.insert({ employee.monthBirth, currentIndex });
+	m_dayBirthMap.insert({ employee.dayBirth, currentIndex });
+
 	currentIndex++;
 }
 
@@ -54,6 +63,41 @@ void DataBase::UpdateRecord(int index, string data, KeyType keyType) {
 		formerData = m_memberList[index].certi;
 		m_memberList[index].certi = data;
 		break;
+	case KeyType::FirstName:
+		pMap = &m_firstNameMap;
+		formerData = m_memberList[index].firstName;
+		m_memberList[index].firstName = data;
+		break;
+	case KeyType::LastName:
+		pMap = &m_lastNameMap;
+		formerData = m_memberList[index].lastName;
+		m_memberList[index].lastName = data;
+		break;
+	case KeyType::MiddlePhoneNum:
+		pMap = &m_middlePhoneNumMap;
+		formerData = m_memberList[index].middlePhoneNum;
+		m_memberList[index].middlePhoneNum = data;
+		break;
+	case KeyType::LastPhoneNum:
+		pMap = &m_lastPhoneNumMap;
+		formerData = m_memberList[index].lastPhoneNum;
+		m_memberList[index].lastPhoneNum = data;
+		break;
+	case KeyType::YearBirth:
+		pMap = &m_yearBirthMap;
+		formerData = m_memberList[index].yearBirth;
+		m_memberList[index].yearBirth = data;
+		break;
+	case KeyType::MonthBirth:
+		pMap = &m_monthBirthMap;
+		formerData = m_memberList[index].monthBirth;
+		m_memberList[index].monthBirth = data;
+		break;
+	case KeyType::DayBirth:
+		pMap = &m_dayBirthMap;
+		formerData = m_memberList[index].dayBirth;
+		m_memberList[index].dayBirth = data;
+		break;
 	}
 
 	// Update changed key-based Map
@@ -96,6 +140,27 @@ vector<int> DataBase::FindMapAll(KeyType keyType, string key) {
 		break;
 	case KeyType::Certi:
 		pMap = &m_certiMap;
+		break;
+	case KeyType::FirstName:
+		pMap = &m_firstNameMap;
+		break;
+	case KeyType::LastName:
+		pMap = &m_lastNameMap;
+		break;
+	case KeyType::MiddlePhoneNum:
+		pMap = &m_middlePhoneNumMap;
+		break;
+	case KeyType::LastPhoneNum:
+		pMap = &m_lastPhoneNumMap;
+		break;
+	case KeyType::YearBirth:
+		pMap = &m_yearBirthMap;
+		break;
+	case KeyType::MonthBirth:
+		pMap = &m_monthBirthMap;
+		break;
+	case KeyType::DayBirth:
+		pMap = &m_dayBirthMap;
 		break;
 	}
 	
