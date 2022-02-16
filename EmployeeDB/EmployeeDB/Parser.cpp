@@ -52,19 +52,96 @@ void Parser::ParseCmdLine(string line, OUT CmdPacket& cmdPacket) {
 }
 
 void Parser::ParseName(string name, OUT string& firstName, string& lastName) {
+	char token = ' ';
+	stringstream sstream(name);
 
+	string word;
+	int wordIndex = 0;
+	while (getline(sstream, word, token)) {
+
+		if (wordIndex == 0) {
+			firstName = word;
+		}
+		else if (wordIndex == 1) {
+			lastName = word;
+		}
+		else {
+			cout << "[Fail] intput data format error" << endl;
+		}
+		wordIndex++;
+	}
 }
 
 void Parser::ParsePhoneNum(string phoneNum, OUT string& middlePhoneNum, OUT string& lastPhoneNum) {
+	char token = '-';
+	stringstream sstream(phoneNum);
 
+	string word;
+	int wordIndex = 0;
+	while (getline(sstream, word, token)) {
+
+		if (wordIndex == 0) {
+			// for debug, do nothing
+		}
+		else if (wordIndex == 1) {
+			middlePhoneNum = word;
+		}
+		else if (wordIndex == 2) {
+			lastPhoneNum = word;
+		}
+		else {
+			cout << "[Fail] intput data format error" << endl;
+		}
+		wordIndex++;
+	}
 }
 
 void Parser::ParseBirthDay(string birthDay, OUT string& year, OUT string& month, OUT string& day) {
 
+
+	for (int index = 0; index < birthDay.size(); index++) {
+		char ch = birthDay.at(index);
+
+		if (index <= 3) {
+			year += ch;
+		}
+		else if (index <= 5) {
+			month += ch;
+		}
+		else if (index <= 7) {
+			day += ch;
+		}
+		else {
+			cout << "[Fail] intput data format error" << endl;
+		}
+	}
 }
 
-
 OptionType Parser::ParseOption(string option) {
-	OptionType optionType = OptionType::d;
+	
+	OptionType optionType;
+
+	if (option.compare("-p") == 0) {
+		optionType = OptionType::p;
+	}
+	else if (option.compare("-f") == 0) {
+		optionType = OptionType::f;
+	}
+	else if (option.compare("-l") == 0) {
+		optionType = OptionType::l;
+	}
+	else if (option.compare("-m") == 0) {
+		optionType = OptionType::m;
+	}
+	else if (option.compare("-y") == 0) {
+		optionType = OptionType::y;
+	}
+	else if (option.compare("-d") == 0) {
+		optionType = OptionType::d;
+	}
+	else {
+		cout << "[Fail] intput data format error" << endl;
+	}
+
 	return optionType;
 }

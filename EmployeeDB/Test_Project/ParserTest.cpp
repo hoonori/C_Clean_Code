@@ -27,7 +27,8 @@ TEST(ParserTset, ParseNameTest) {
 	string lastName;
 	Parser::ParseName(str, firstName, lastName);
 
-	EXPECT_TRUE(false);
+	EXPECT_EQ(0, firstName.compare("VXIHXOTH"));
+	EXPECT_EQ(0, lastName.compare("JHOP"));
 }
 
 TEST(ParserTset, ParsePhoneNumTest) {
@@ -37,7 +38,8 @@ TEST(ParserTset, ParsePhoneNumTest) {
 	string lastPhoneNum;
 	Parser::ParsePhoneNum(str, middlePhoneNum, lastPhoneNum);
 
-	EXPECT_TRUE(false);
+	EXPECT_EQ(0, middlePhoneNum.compare("3112"));
+	EXPECT_EQ(0, lastPhoneNum.compare("2609"));
 }
 
 TEST(ParserTset, ParseBirthDayTest) {
@@ -48,7 +50,10 @@ TEST(ParserTset, ParseBirthDayTest) {
 	string day;
 	Parser::ParseBirthDay(str, year, month, day);
 
-	EXPECT_TRUE(false);
+	EXPECT_EQ(0, year.compare("1977"));
+	EXPECT_EQ(0, month.compare("12"));
+	EXPECT_EQ(0, day.compare("11"));
+
 }
 
 TEST(ParserTset, ParseOptionTest) {
@@ -56,5 +61,5 @@ TEST(ParserTset, ParseOptionTest) {
 
 	OptionType optionType = Parser::ParseOption(str);
 
-	EXPECT_TRUE(false);
+	EXPECT_EQ(OptionType::p, optionType);
 }
