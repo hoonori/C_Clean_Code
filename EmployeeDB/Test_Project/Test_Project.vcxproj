@@ -41,6 +41,7 @@
     <ClCompile Include="DeleterTest.cpp" />
     <ClCompile Include="ModifierTest.cpp" />
     <ClCompile Include="ParserTest.cpp" />
+    <ClCompile Include="PrinterTest.cpp" />
     <ClCompile Include="SearcherTest.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

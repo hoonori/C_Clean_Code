@@ -145,6 +145,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Modifier.cpp" />
     <ClCompile Include="Parser.cpp" />
+    <ClCompile Include="Printer.cpp" />
     <ClCompile Include="Searcher.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -154,6 +155,7 @@
     <ClInclude Include="Deleter.h" />
     <ClInclude Include="Modifier.h" />
     <ClInclude Include="Parser.h" />
+    <ClInclude Include="Printer.h" />
     <ClInclude Include="Searcher.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
