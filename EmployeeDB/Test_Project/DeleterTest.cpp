@@ -30,3 +30,32 @@ TEST(DeleteTest, BasicTest) {
 	EXPECT_EQ(deleter.Delete(0,0, KeyType::Certi, list[5].certi), 1);
 	
 }
+
+TEST(DeleteTest, Option2Test) {
+	DataBase* database = new DataBase();
+	Deleter deleter(database);
+
+	Employee list[7];
+	list[0] = { true, "00000000", "JIHOON KIM", "CL2", "010-0000-0000", "970319", "PRO" };
+	list[1] = { true, "00000001", "DONGWOO PARK", "CL2", "010-0000-0001", "970320", "PRO" };
+	list[2] = { true, "00000002", "JOONGHYUN KIM", "CL2", "010-0010-0002", "970321", "PRO" };
+	list[3] = { true, "00000003", "DONGIL LEE", "CL3", "010-0000-0003", "970322", "PRO" };
+	list[4] = { true, "00000004", "SEUNGJI GWAK", "CL4", "010-0000-0004", "970323", "PRO" };
+	list[5] = { true, "00000005", "YOUNGDOO KIM", "CL3", "010-0000-0005", "980424", "PRO" };
+	list[6] = { true, "00000006", "JUNSEOK YANG", "CL4", "010-0000-0006", "990525", "EX" };
+
+	for (int i = 0; i < 7; i++)
+	{
+		database->CreateRecord(list[i]);
+	}
+
+	EXPECT_EQ(deleter.Delete(0, 'f', KeyType::Name,"JIHOON"),1);
+	EXPECT_EQ(deleter.Delete(0, 'l', KeyType::Name, "PARK"), 1);
+
+	EXPECT_EQ(deleter.Delete(0, 'm', KeyType::PhoneNum, "0010"), 1);
+	EXPECT_EQ(deleter.Delete(0, 'l', KeyType::PhoneNum, "0003"), 1);
+
+	EXPECT_EQ(deleter.Delete(0, 'y', KeyType::Birthday, "97"), 1);
+	EXPECT_EQ(deleter.Delete(0, 'm', KeyType::Birthday, "04"), 1);
+	EXPECT_EQ(deleter.Delete(0, 'l', KeyType::Birthday, "25"), 1);
+}
