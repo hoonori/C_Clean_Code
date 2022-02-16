@@ -10,6 +10,7 @@
 #include "Deleter.h"
 #include "Searcher.h"
 #include "Modifier.h"
+#include "Printer.h"
 
 int main(int argc, char* argv[]) {
 
@@ -21,10 +22,12 @@ int main(int argc, char* argv[]) {
 	ifs.open(inputFileName);
 	ofs.open(outputFileName);
 
+	Printer* printer = new Printer(&ofs);
+	Parser* parser = new Parser;
 	DataBase* database = new DataBase();
 	Adder* adder = new Adder(database);
 	Deleter* deleter = new Deleter(database);
-	Searcher* searcher = new Searcher(database);
+	Searcher* searcher = new Searcher(database, printer);
 	Modifier* modifier = new Modifier(database);
 
 	if (!ifs.fail()) {
