@@ -22,5 +22,37 @@ TEST(PrinterTest, PrintTest) {
 	printer.PrintNone("SCH");
 	printer.PrintCount("DEL", 1);
 
-	EXPECT_TRUE(false);
+	ofs.close();
+
+	ifstream ifs;
+	
+	ifs.open(outFileName);
+
+	string line;
+
+	string res1;
+	string res2;
+	string res3;
+
+	int index = 0;
+	while (getline(ifs, line)) {
+		if (index == 0) {
+			res1 = line;
+		}
+		else if (index == 1) {
+			res2 = line;
+		}
+		else if (index == 2) {
+			res3 = line;
+		}
+
+		index++;
+	}
+	
+	EXPECT_EQ(0, res1.compare(expected1));
+	EXPECT_EQ(0, res2.compare(expected2));
+	EXPECT_EQ(0, res3.compare(expected3));
+
+	ifs.close();
+	std::remove(outFileName.c_str());
 }
