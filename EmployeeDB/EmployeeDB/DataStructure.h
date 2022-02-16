@@ -15,6 +15,7 @@ struct Employee {
 
 	string firstName;
 	string lastName;
+
 	string middlePhoneNum;
 	string lastPhoneNum;
 
