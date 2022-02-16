@@ -18,6 +18,7 @@ void Printer::PrintRecord(string cmd, string employNum, string name, string cl, 
 	*m_outfileStream << str << endl;
 }
 
+
 void Printer::PrintCount(string cmd, int recordCount) {
 	string str;
 
