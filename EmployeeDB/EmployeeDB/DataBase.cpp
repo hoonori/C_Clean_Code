@@ -166,7 +166,9 @@ vector<int> DataBase::FindMapAll(KeyType keyType, string key) {
 	
 	for (auto iter = pMap->lower_bound(key); iter != pMap->upper_bound(key); iter++) {
 		int index = iter->second;
-		vector.push_back(index);
+		if (m_memberList[index].valid == true) {
+			vector.push_back(index);
+		}
 	}
 	
 	return vector;
