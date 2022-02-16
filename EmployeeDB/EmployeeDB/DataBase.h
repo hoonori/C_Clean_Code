@@ -24,6 +24,15 @@ private:
 	multimap<string, int> m_birthdayMap;
 	multimap<string, int> m_certiMap;
 
+	multimap<string, int> m_firstNameMap;
+	multimap<string, int> m_lastNameMap;
+	multimap<string, int> m_middlePhoneNumMap;
+	multimap<string, int> m_lastPhoneNumMap;
+
+	multimap<string, int> m_yearBirthMap;
+	multimap<string, int> m_monthBirthMap;
+	multimap<string, int> m_dayBirthMap;
+
 	int currentIndex = 0;
 };
 
