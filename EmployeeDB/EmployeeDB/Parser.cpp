@@ -186,7 +186,29 @@ void Parser::SortEmployee(OUT vector<Employee>& employVec) {
 }
 
 KeyType Parser::TranslateKeyType(string keyname) {
-	KeyType keyType = KeyType::EmployeeNum;
+	KeyType keyType;
+
+	if (keyname.compare("employeeNum") == 0) {
+		keyType = KeyType::EmployeeNum;
+	}
+	else if (keyname.compare("name") == 0) {
+		keyType = KeyType::Name;
+	}
+	else if (keyname.compare("cl") == 0) {
+		keyType = KeyType::Cl;
+	}
+	else if (keyname.compare("phoneNum") == 0) {
+		keyType = KeyType::PhoneNum;
+	}
+	else if (keyname.compare("birthday") == 0) {
+		keyType = KeyType::Birthday;
+	}
+	else if (keyname.compare("certi") == 0) {
+		keyType = KeyType::Certi;
+	}
+	else {
+		cout << "[Fail] wrong key name" << endl;
+	}
 
 	return keyType;
 }
