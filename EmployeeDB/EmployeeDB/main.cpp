@@ -21,7 +21,6 @@ int main(int argc, char* argv[]) {
 	ifs.open(inputFileName);
 	ofs.open(outputFileName);
 
-	Parser* parser = new Parser;
 	DataBase* database = new DataBase();
 	Adder* adder = new Adder(database);
 	Deleter* deleter = new Deleter(database);
@@ -33,7 +32,7 @@ int main(int argc, char* argv[]) {
 		while (getline(ifs, line)) {
 			cout << line << endl;
 			CmdPacket cmdPacket;
-			parser->Parse(line, cmdPacket);
+			Parser::ParseCmdLine(line, cmdPacket);
 
 			if (cmdPacket.cmd.compare("ADD") == 0) {
 				string employNum = cmdPacket.data1;

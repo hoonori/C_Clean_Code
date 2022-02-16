@@ -3,7 +3,7 @@
 
 #include "Parser.h"
 
-void Parser::Parse(string line, OUT CmdPacket& cmdPacket) {
+void Parser::ParseCmdLine(string line, OUT CmdPacket& cmdPacket) {
 
 	char token = ',';
 	stringstream sstream(line);
@@ -49,4 +49,22 @@ void Parser::Parse(string line, OUT CmdPacket& cmdPacket) {
 
 		wordIndex++;
 	}
+}
+
+void Parser::ParseName(string name, OUT string& firstName, string& lastName) {
+
+}
+
+void Parser::ParsePhoneNum(string phoneNum, OUT string& middlePhoneNum, OUT string& lastPhoneNum) {
+
+}
+
+void Parser::ParseBirthDay(string birthDay, OUT string& year, OUT string& month, OUT string& day) {
+
+}
+
+
+OptionType Parser::ParseOption(string option) {
+	OptionType optionType = OptionType::d;
+	return optionType;
 }

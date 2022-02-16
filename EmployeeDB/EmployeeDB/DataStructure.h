@@ -51,3 +51,12 @@ enum class KeyType {
 	MonthBirth,
 	DayBirth,
 };
+
+enum class OptionType {
+	p,
+	f, // first name, first phoneNum
+	l, // last name, last phoneNum
+	m, // middle phoneNum, month
+	y,
+	d,
+};
