@@ -20,6 +20,9 @@
     <ClCompile Include="DataBaseTest.cpp">
       <Filter>Test</Filter>
     </ClCompile>
+    <ClCompile Include="PrinterTest.cpp">
+      <Filter>Test</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
