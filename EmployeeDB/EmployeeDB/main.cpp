@@ -35,7 +35,7 @@ int main(int argc, char* argv[]) {
 		while (getline(ifs, line)) {
 			cout << line << endl;
 			CmdPacket cmdPacket;
-			parser->Parse(line, cmdPacket);
+			Parser::ParseCmdLine(line, cmdPacket);
 
 			if (cmdPacket.cmd.compare("ADD") == 0) {
 				string employNum = cmdPacket.data1;
