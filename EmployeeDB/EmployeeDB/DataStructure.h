@@ -12,6 +12,15 @@ struct Employee {
 	string phoneNum;
 	string birthday;
 	string certi;
+
+	string firstName;
+	string lastName;
+	string middlePhoneNum;
+	string lastPhoneNum;
+
+	string yearBirth;
+	string monthBirth;
+	string dayBirth;
 };
 
 struct CmdPacket {
@@ -34,4 +43,11 @@ enum class KeyType {
 	PhoneNum,
 	Birthday,
 	Certi,
+	FirstName,
+	LastName,
+	MiddlePhoneNum,
+	LastPhoneNum,
+	YearBirth,
+	MonthBirth,
+	DayBirth,
 };
