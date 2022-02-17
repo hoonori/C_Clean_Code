@@ -68,8 +68,10 @@ bool Searcher::Search(KeyType keyType, string key, OptionType ot1, OptionType ot
 	case OptionType::d:
 		resVec = m_dataBase->FindMapAll(KeyType::DayBirth, key);
 		break;
-	default:
+	case OptionType::none:
 		resVec = m_dataBase->FindMapAll(keyType, key);
+		break;
+	default:
 		break;
 	}
 
