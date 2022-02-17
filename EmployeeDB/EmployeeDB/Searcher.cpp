@@ -1,4 +1,5 @@
 #include "Searcher.h"
+#include "Parser.h"
 
 Searcher::Searcher(DataBase* dataBase, Printer* printer) {
 	m_dataBase = dataBase;
@@ -24,74 +25,76 @@ bool Searcher::CallPrinter(Employee employee)
 	//	phoneNum.c_str(),
 	//	birthday.c_str(),
 	//	certi.c_str());
-	//m_Printer->PrintRecord(m_comm, employNum, name, cl, phoneNum, birthday, certi);
+	m_Printer->PrintRecord(m_comm, employNum, name, cl, phoneNum, birthday, certi);
 
 	return true;
 }
 
-vector<int> Searcher::Search(KeyType keyType, string key)
+bool Searcher::isNumber(const string& str)
 {
-	OptType opt1 = OptType::FirstName;
-	OptType opt2 = OptType::FirstName;
+	for (char const& c : str) {
+		if (std::isdigit(c) == 0) return false;
+	}
+	return true;
+}
 
+bool Searcher::Search(KeyType keyType, string key, OptionType ot1, OptionType ot2)
+{
 	vector<int> resVec;
-		
-	switch (keyType) {
-	 case KeyType::FirstName:
-		 resVec = m_dataBase->FindMapAll(KeyType::FirstName, key);
-		 break;
-	 case KeyType::LastName:
-		 resVec = m_dataBase->FindMapAll(KeyType::LastName, key);
-		 break;
-	 case KeyType::MiddlePhoneNum:
-		 resVec = m_dataBase->FindMapAll(KeyType::MiddlePhoneNum, key);
-		 break;
-	 case KeyType::LastPhoneNum:
-		 resVec = m_dataBase->FindMapAll(KeyType::LastPhoneNum, key);
-		 break;
-	 case KeyType::YearBirth:
-		 resVec = m_dataBase->FindMapAll(KeyType::YearBirth, key);
-		 break;
-	 case KeyType::MonthBirth:
-		 resVec = m_dataBase->FindMapAll(KeyType::MonthBirth, key);
-		 break;
-	 case KeyType::DayBirth:
-		 resVec = m_dataBase->FindMapAll(KeyType::DayBirth, key);
-		 break;
-	 default :
-		 resVec = m_dataBase->FindMapAll(keyType, key);
-		 break;
 
+	switch (ot2) {
+	case OptionType::f:
+		resVec = m_dataBase->FindMapAll(KeyType::FirstName, key);
+		break;
+	case OptionType::l:
+		if (isNumber(key)) {
+			resVec = m_dataBase->FindMapAll(KeyType::LastPhoneNum, key);
+		}
+		else {
+			resVec = m_dataBase->FindMapAll(KeyType::LastName, key);
+		}
+		break;
+	case OptionType::m:
+		if (key.size() ==4) {
+			resVec = m_dataBase->FindMapAll(KeyType::MiddlePhoneNum, key);
+		}
+		else {
+			resVec = m_dataBase->FindMapAll(KeyType::MonthBirth, key);
+		}
+		break;
+	case OptionType::y:
+		resVec = m_dataBase->FindMapAll(KeyType::YearBirth, key);
+		break;
+	case OptionType::d:
+		resVec = m_dataBase->FindMapAll(KeyType::DayBirth, key);
+		break;
+	default:
+		resVec = m_dataBase->FindMapAll(keyType, key);
+		break;
 	}
 
 	int size = (int)resVec.size();
 
 	if (size == 0) {
 		m_Printer->PrintNone(m_comm);
-		return resVec;
+		return true;
 	}
 
-	if (opt1 == OptType::Printer) {
-		// vector sort
-		Employee tempEmployee;
-		vector<pair<unsigned long, int>> v;
-		for (auto iter = resVec.begin(); iter != resVec.end(); iter++) {
-			tempEmployee = m_dataBase->ReadRecord(*iter);
-			unsigned long ul = stoul(tempEmployee.employeeNum);
-			v.push_back(pair<unsigned long, int>(ul, resVec[*iter]));
-		}
-		sort(v.begin(), v.end());
+	if (ot1 == OptionType::p) {
+		vector<Employee> employVec;
 
-		//vector 5°³ Ãâ·Â
+		for (auto iter = resVec.begin(); iter != resVec.end(); iter++) {
+			employVec.push_back(m_dataBase->ReadRecord(*iter));
+		}
+
+		Parser::SortEmployee(employVec);
+
 		int cnt = 0;
-		for (auto iter = v.begin(); iter != v.end(); iter++) {
-			
+		for (int i = 0; i < employVec.size(); i++) {
 			if (cnt > 4) {
 				break;
 			}
-
-			Employee tempEmployee = m_dataBase->ReadRecord(iter->second);
-			CallPrinter(tempEmployee);
+			CallPrinter(employVec.at(i));
 			cnt++;
 		}
 
@@ -100,6 +103,6 @@ vector<int> Searcher::Search(KeyType keyType, string key)
 		m_Printer->PrintCount(m_comm, size);
 	}
 
-	return resVec;
+	return true;
 }
 
