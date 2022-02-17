@@ -86,10 +86,10 @@ TEST(ModifierTest, OptionTest) {
 	adder->Add(employeeNum, name, cl, phoneNum, birthday, certi);
 
 	employeeNum = "21123099";
-	name = "VXIHXOTH HHOP";
+	name = "Park HHOP";
 	cl = "CL3";
-	phoneNum = "010-1234-2609";
-	birthday = "19771212";
+	phoneNum = "010-1234-1234";
+	birthday = "19880912";
 	certi = "PRO";
 
 	adder->Add(employeeNum, name, cl, phoneNum, birthday, certi);
@@ -153,4 +153,36 @@ TEST(ModifierTest, OptionTest) {
 
 	resVector = db->FindMapAll(KeyType::Birthday, "19930317");
 	EXPECT_EQ(1, resVector.size());
+
+
+	// check if former data is not erased
+	resVector = db->FindMapAll(KeyType::FirstName, "VXIHXOTH");
+	EXPECT_EQ(0, resVector.size());
+
+	resVector = db->FindMapAll(KeyType::LastName, "JHOP");
+	EXPECT_EQ(0, resVector.size());
+
+	resVector = db->FindMapAll(KeyType::MiddlePhoneNum, "3112");
+	EXPECT_EQ(0, resVector.size());
+
+	resVector = db->FindMapAll(KeyType::LastPhoneNum, "2609");
+	EXPECT_EQ(0, resVector.size());
+
+	resVector = db->FindMapAll(KeyType::YearBirth, "1977");
+	EXPECT_EQ(0, resVector.size());
+
+	resVector = db->FindMapAll(KeyType::MonthBirth, "12");
+	EXPECT_EQ(0, resVector.size());
+
+	resVector = db->FindMapAll(KeyType::DayBirth, "11");
+	EXPECT_EQ(0, resVector.size());
+
+	resVector = db->FindMapAll(KeyType::Name, "VXIHXOTH JHOP");
+	EXPECT_EQ(0, resVector.size());
+
+	resVector = db->FindMapAll(KeyType::PhoneNum, "010-3112-2609");
+	EXPECT_EQ(0, resVector.size());
+
+	resVector = db->FindMapAll(KeyType::Birthday, "19771211");
+	EXPECT_EQ(0, resVector.size());
 }
