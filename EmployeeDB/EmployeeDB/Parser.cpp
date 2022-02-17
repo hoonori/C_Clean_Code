@@ -79,7 +79,7 @@ void Parser::ParseCmdLine(string line, OUT CmdPacket& cmdPacket) {
 			cmdPacket.data6 = word;
 		}
 		else {
-			cout << "[Fail] intput data format error" << endl;
+			cout << "[Fail] intput data Cmd format error" << endl;
 		}
 
 		wordIndex++;
@@ -101,7 +101,7 @@ void Parser::ParseName(string name, OUT string& firstName, string& lastName) {
 			lastName = word;
 		}
 		else {
-			cout << "[Fail] intput data format error" << endl;
+			cout << "[Fail] intput data Name format error" << endl;
 		}
 		wordIndex++;
 	}
@@ -125,7 +125,7 @@ void Parser::ParsePhoneNum(string phoneNum, OUT string& middlePhoneNum, OUT stri
 			lastPhoneNum = word;
 		}
 		else {
-			cout << "[Fail] intput data format error" << endl;
+			cout << "[Fail] intput data PhoneNum format error" << endl;
 		}
 		wordIndex++;
 	}
@@ -147,14 +147,14 @@ void Parser::ParseBirthDay(string birthDay, OUT string& year, OUT string& month,
 			day += ch;
 		}
 		else {
-			cout << "[Fail] intput data format error" << endl;
+			cout << "[Fail] intput data BirthDay format error" << endl;
 		}
 	}
 }
 
 OptionType Parser::ParseOption(string option) {
 	
-	OptionType optionType;
+	OptionType optionType = OptionType::Count;
 
 	if (option.compare("-p") == 0) {
 		optionType = OptionType::p;
@@ -174,8 +174,11 @@ OptionType Parser::ParseOption(string option) {
 	else if (option.compare("-d") == 0) {
 		optionType = OptionType::d;
 	}
+	else if (option.compare(" ") == 0) {
+		optionType = OptionType::none;
+	}
 	else {
-		cout << "[Fail] intput data format error" << endl;
+		cout << "[Fail] intput data Option format error" << endl;
 	}
 
 	return optionType;
@@ -183,5 +186,33 @@ OptionType Parser::ParseOption(string option) {
 
 void Parser::SortEmployee(OUT vector<Employee>& employVec) {
 	sort(employVec.begin(), employVec.end(), compare);
+}
+
+KeyType Parser::TranslateKeyType(string keyname) {
+	KeyType keyType = KeyType::Count;
+
+	if (keyname.compare("employeeNum") == 0) {
+		keyType = KeyType::EmployeeNum;
+	}
+	else if (keyname.compare("name") == 0) {
+		keyType = KeyType::Name;
+	}
+	else if (keyname.compare("cl") == 0) {
+		keyType = KeyType::Cl;
+	}
+	else if (keyname.compare("phoneNum") == 0) {
+		keyType = KeyType::PhoneNum;
+	}
+	else if (keyname.compare("birthday") == 0) {
+		keyType = KeyType::Birthday;
+	}
+	else if (keyname.compare("certi") == 0) {
+		keyType = KeyType::Certi;
+	}
+	else {
+		cout << "[Fail] wrong key name" << endl;
+	}
+
+	return keyType;
 }
 
