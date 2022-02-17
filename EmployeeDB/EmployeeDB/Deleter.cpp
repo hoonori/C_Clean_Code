@@ -1,15 +1,11 @@
 #include "Deleter.h"
+#include "Parser.h"
 
 #include "DataStructure.h"
 
-Deleter::Deleter(DataBase* dataBase) {
-	m_dataBase = dataBase;
-}
-
-Deleter::Deleter(DataBase* dataBase, Printer* printer, Parser* parser) {
+Deleter::Deleter(DataBase* dataBase, Printer* printer) {
 	m_dataBase = dataBase;
 	m_printer = printer;
-	m_parser = parser;
 }
 
 int Deleter::Delete(OptionType option1, OptionType option2, KeyType type, string key)
@@ -76,7 +72,7 @@ int Deleter::Delete(OptionType option1, OptionType option2, KeyType type, string
 	}
 	else if (option1 == OptionType::p)
 	{
-		m_parser->SortEmployee(deleteList);
+		Parser::SortEmployee(deleteList);
 		int printed = 0;
 		for (auto iter = deleteList.begin(); iter != deleteList.end(); iter++)
 		{

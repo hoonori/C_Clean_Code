@@ -15,8 +15,7 @@ TEST(DeleteTest, BasicTest) {
 	ofs.open(outFileName);
 
 	Printer* printer = new Printer(&ofs);
-	Parser* parser = new Parser();
-	Deleter deleter(database, printer, parser);
+	Deleter deleter(database, printer);
 
 	Employee list[7];
 	list[0] = {true, "00000000", "JIHOON KIM", "CL2", "010-0000-0000", "970319", "PRO"};
@@ -51,8 +50,7 @@ TEST(DeleteTest, Option2Test) {
 	ofs.open(outFileName);
 
 	Printer* printer = new Printer(&ofs);
-	Parser* parser = new Parser();
-	Deleter deleter(database, printer, parser);
+	Deleter deleter(database, printer);
 
 	Employee list[7];
 	list[0] = { true, "00000000", "JIHOON KIM", "CL2", "010-0000-0000", "970319", "PRO", "JIHOON", "KIM", "0000", "0000", "97", "03", "19"};
@@ -93,8 +91,7 @@ TEST(DeleteTest, Option1Test)
 	ofs.open(outFileName);
 
 	Printer* printer = new Printer(&ofs);
-	Parser* parser = new Parser();
-	Deleter deleter(database, printer, parser);
+	Deleter deleter(database, printer);
 
 	Employee list[7];
 	list[0] = { true, "69000000", "JIHOON KIM", "CL2", "010-0000-0000", "970319", "PRO", "JIHOON", "KIM", "0000", "0000", "97", "03", "19" };
