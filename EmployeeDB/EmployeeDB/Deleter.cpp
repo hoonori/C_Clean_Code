@@ -6,6 +6,10 @@ Deleter::Deleter(DataBase* dataBase) {
 	m_dataBase = dataBase;
 }
 
+Deleter::Deleter(DataBase* dataBase, Printer* printer, Parser* parser) {
+
+}
+
 int Deleter::Delete(char option1, char option2, KeyType type, string key)
 {
 	if (option2 != 0)
