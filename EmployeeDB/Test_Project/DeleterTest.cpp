@@ -9,7 +9,14 @@
 
 TEST(DeleteTest, BasicTest) {
 	DataBase* database = new DataBase();
-	Deleter deleter(database);
+	ofstream ofs;
+
+	string outFileName = "output_test.txt";
+	ofs.open(outFileName);
+
+	Printer* printer = new Printer(&ofs);
+	Parser* parser = new Parser();
+	Deleter deleter(database, printer, parser);
 
 	Employee list[7];
 	list[0] = {true, "00000000", "JIHOON KIM", "CL2", "010-0000-0000", "970319", "PRO"};
@@ -31,12 +38,21 @@ TEST(DeleteTest, BasicTest) {
 	EXPECT_EQ(deleter.Delete(0,0, KeyType::PhoneNum, list[3].phoneNum), 1);
 	EXPECT_EQ(deleter.Delete(0,0, KeyType::Birthday, list[4].birthday), 1);
 	EXPECT_EQ(deleter.Delete(0,0, KeyType::Certi, list[5].certi), 1);
-	
+	ofs.close();
+	std::remove(outFileName.c_str());
 }
+
 
 TEST(DeleteTest, Option2Test) {
 	DataBase* database = new DataBase();
-	Deleter deleter(database);
+	ofstream ofs;
+
+	string outFileName = "output_test.txt";
+	ofs.open(outFileName);
+
+	Printer* printer = new Printer(&ofs);
+	Parser* parser = new Parser();
+	Deleter deleter(database, printer, parser);
 
 	Employee list[7];
 	list[0] = { true, "00000000", "JIHOON KIM", "CL2", "010-0000-0000", "970319", "PRO", "JIHOON", "KIM", "0000", "0000", "97", "03", "19"};
@@ -61,6 +77,8 @@ TEST(DeleteTest, Option2Test) {
 	EXPECT_EQ(deleter.Delete(0, 'y', KeyType::Birthday, "97"), 1);
 	EXPECT_EQ(deleter.Delete(0, 'm', KeyType::Birthday, "04"), 1);
 	EXPECT_EQ(deleter.Delete(0, 'd', KeyType::Birthday, "25"), 1);
+	ofs.close();
+	std::remove(outFileName.c_str());
 }
 
 
@@ -92,14 +110,15 @@ TEST(DeleteTest, Option1Test)
 		database->CreateRecord(list[i]);
 	}
 
-	deleter.Delete('p', '0', KeyType::Cl, "CL2");
+	EXPECT_EQ(7,deleter.Delete('p', 0, KeyType::Cl, "CL2"));
+	EXPECT_EQ(0,deleter.Delete('p', 0, KeyType::Cl, "CL2"));
 
 	string expected1 = "DEL,69000000,JIHOON KIM,CL2,010-0000-0000,970319,PRO";
 	string expected2 = "DEL,69000001,DONGWOO PARK,CL2,010-0000-0001,970320,PRO";
-	string expected3 = "DEL,70000002,JOONGHYUN KIM,CL2,010-0000-0002,970321,PRO";
+	string expected3 = "DEL,70000002,JOONGHYUN KIM,CL2,010-0010-0002,970321,PRO";
 	string expected4 = "DEL,70000003,DONGIL LEE,CL2,010-0000-0003,970322,PRO";
 	string expected5 = "DEL,19000004,SEUNGJI GWAK,CL2,010-0000-0004,970323,PRO";
-
+	string expected6 = "DEL,NONE";
 	ofs.close();
 
 	ifstream ifs;
@@ -113,6 +132,8 @@ TEST(DeleteTest, Option1Test)
 	string res3;
 	string res4;
 	string res5;
+	string res6;
+
 
 	int index = 0;
 	while (getline(ifs, line)) {
@@ -131,6 +152,9 @@ TEST(DeleteTest, Option1Test)
 		else if (index == 4) {
 			res5 = line;
 		}
+		else if (index == 5) {
+			res6 = line;
+		}
 
 		index++;
 	}
@@ -140,6 +164,8 @@ TEST(DeleteTest, Option1Test)
 	EXPECT_EQ(0, res3.compare(expected3));
 	EXPECT_EQ(0, res4.compare(expected4));
 	EXPECT_EQ(0, res5.compare(expected5));
+	EXPECT_EQ(0, res6.compare(expected6));
+	EXPECT_EQ(res6, expected6);
 
 
 	ifs.close();

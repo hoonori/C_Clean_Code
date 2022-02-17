@@ -7,7 +7,9 @@ Deleter::Deleter(DataBase* dataBase) {
 }
 
 Deleter::Deleter(DataBase* dataBase, Printer* printer, Parser* parser) {
-
+	m_dataBase = dataBase;
+	m_printer = printer;
+	m_parser = parser;
 }
 
 int Deleter::Delete(char option1, char option2, KeyType type, string key)
@@ -55,16 +57,38 @@ int Deleter::Delete(char option1, char option2, KeyType type, string key)
 			return -1;
 		}
 	}
-
+	vector<Employee> deleteList;
 	vector<int> list = 	m_dataBase->FindMapAll(type, key);
 	int count = 0;
 	for (auto iter = list.begin(); iter != list.end(); iter++)
 	{
 		if (m_dataBase->ReadRecord(*iter).valid)
 		{
+			deleteList.push_back(m_dataBase->ReadRecord(*iter));
 			count++;
 			m_dataBase->DeleteRecord(*iter);
 		}
 	}
+	
+	if (count == 0)
+	{
+		m_printer->PrintNone("DEL");
+	}
+	else if (option1 == 'p')
+	{
+		m_parser->SortEmployee(deleteList);
+		int printed = 0;
+		for (auto iter = deleteList.begin(); iter != deleteList.end(); iter++)
+		{
+			if (printed >= 5) break;
+			m_printer->PrintRecord("DEL", iter->employeeNum, iter->name, iter->cl, iter->phoneNum, iter->birthday, iter->certi);
+			printed++;
+		}
+	}
+	else
+	{
+		m_printer->PrintCount("DEL", count);
+	}
+	
 	return count;
 }
