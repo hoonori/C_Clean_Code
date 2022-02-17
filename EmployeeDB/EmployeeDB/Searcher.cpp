@@ -80,7 +80,7 @@ bool Searcher::Search(KeyType keyType, string key, OptionType ot1, OptionType ot
 		return true;
 	}
 
-	if (ot1 != OptionType::p) {
+	if (ot1 == OptionType::p) {
 		vector<Employee> employVec;
 
 		for (auto iter = resVec.begin(); iter != resVec.end(); iter++) {
