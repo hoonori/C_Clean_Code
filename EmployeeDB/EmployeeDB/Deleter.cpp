@@ -10,48 +10,7 @@ Deleter::Deleter(DataBase* dataBase, Printer* printer) {
 
 int Deleter::Delete(OptionType option1, OptionType option2, KeyType type, string key)
 {
-	switch (option2) {
-	case OptionType::f :
-		if (type == KeyType::Name) {
-			type = KeyType::FirstName;
-		}
-		else { return -1; }
-		break;
-	case OptionType::l :
-		if (type == KeyType::Name) {
-			type = KeyType::LastName;
-		}
-		else if (type == KeyType::PhoneNum) {
-			type = KeyType::LastPhoneNum;
-		}
-		else { return -1; }
-		break;
-	case OptionType::m :
-		if (type == KeyType::PhoneNum) {
-			type = KeyType::MiddlePhoneNum;
-		}
-		else if (type == KeyType::Birthday) {
-			type = KeyType::MonthBirth;
-		}
-		else { return -1; }
-		break;
-	case OptionType::y :
-		if (type == KeyType::Birthday) {
-			type = KeyType::YearBirth;
-		}
-		else { return -1; }
-		break;
-	case OptionType::d :
-		if (type == KeyType::Birthday) {
-			type = KeyType::DayBirth;
-		}
-		else { return -1; }
-		break;
-	case OptionType::none :
-		break;
-	default:
-		return -1;
-	}
+	type = Parser::ChangeCondition(type, option2);
 
 	vector<Employee> deleteList;
 	vector<int> list = 	m_dataBase->FindMapAll(type, key);

@@ -40,40 +40,7 @@ bool Searcher::isNumber(const string& str)
 
 bool Searcher::Search(KeyType keyType, string key, OptionType ot1, OptionType ot2)
 {
-	vector<int> resVec;
-
-	switch (ot2) {
-	case OptionType::f:
-		resVec = m_dataBase->FindMapAll(KeyType::FirstName, key);
-		break;
-	case OptionType::l:
-		if (isNumber(key)) {
-			resVec = m_dataBase->FindMapAll(KeyType::LastPhoneNum, key);
-		}
-		else {
-			resVec = m_dataBase->FindMapAll(KeyType::LastName, key);
-		}
-		break;
-	case OptionType::m:
-		if (key.size() ==4) {
-			resVec = m_dataBase->FindMapAll(KeyType::MiddlePhoneNum, key);
-		}
-		else {
-			resVec = m_dataBase->FindMapAll(KeyType::MonthBirth, key);
-		}
-		break;
-	case OptionType::y:
-		resVec = m_dataBase->FindMapAll(KeyType::YearBirth, key);
-		break;
-	case OptionType::d:
-		resVec = m_dataBase->FindMapAll(KeyType::DayBirth, key);
-		break;
-	case OptionType::none:
-		resVec = m_dataBase->FindMapAll(keyType, key);
-		break;
-	default:
-		break;
-	}
+	vector<int> resVec = m_dataBase->FindMapAll(Parser::ChangeCondition(keyType,ot2), key);
 
 	int size = (int)resVec.size();
 

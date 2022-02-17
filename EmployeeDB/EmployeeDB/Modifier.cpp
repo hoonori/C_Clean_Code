@@ -7,25 +7,9 @@ Modifier::Modifier(DataBase* dataBase, Printer* printer) {
 
 bool Modifier::Modify(KeyType condType, string condData, KeyType modType, string modData, OptionType option1, OptionType option2) {
 	
-	KeyType condTypeWithOption = condType;	
+	KeyType condTypeWithOption = Parser::ChangeCondition(condType, option2);
 	Parser parser;
 	vector<Employee> sortedEmployee;
-
-	//Option 2: Change condType
-	if (option2 == OptionType::f && condType == KeyType::Name)
-		condTypeWithOption = KeyType::FirstName;
-	else if (option2 == OptionType::l && condType == KeyType::Name)
-		condTypeWithOption = KeyType::LastName;
-	else if (option2 == OptionType::m && condType == KeyType::PhoneNum)
-		condTypeWithOption = KeyType::MiddlePhoneNum;
-	else if (option2 == OptionType::l && condType == KeyType::PhoneNum)
-		condTypeWithOption = KeyType::LastPhoneNum;
-	else if (option2 == OptionType::y && condType == KeyType::Birthday)
-		condTypeWithOption = KeyType::YearBirth;
-	else if (option2 == OptionType::m && condType == KeyType::Birthday)
-		condTypeWithOption = KeyType::MonthBirth;
-	else if (option2 == OptionType::d && condType == KeyType::Birthday)
-		condTypeWithOption = KeyType::DayBirth;
 
 	vector<int> indexVec = m_dataBase->FindMapAll(condTypeWithOption, condData);
 	
