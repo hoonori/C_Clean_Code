@@ -3,7 +3,7 @@
 
 #include "DataStructure.h"
 
-Deleter::Deleter(DataBase* dataBase, Printer* printer) {
+Deleter::Deleter(IDataBase* dataBase, IPrinter* printer) {
 	m_dataBase = dataBase;
 	m_printer = printer;
 }

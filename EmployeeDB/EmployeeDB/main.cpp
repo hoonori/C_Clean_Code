@@ -12,6 +12,7 @@
 #include "Modifier.h"
 #include "Printer.h"
 
+
 int main(int argc, char* argv[]) {
 
 	string inputFileName = argv[1];
@@ -46,16 +47,6 @@ int main(int argc, char* argv[]) {
 				string certi = cmdPacket.data6;
 
 				adder->Add(employNum, name, cl, phoneNumber, birthday, certi);
-
-				// for debug
-				//cout << "--------------------------" << endl;
-				//cout << "ADDED" << endl;
-				//cout << employNum << endl;
-				//cout << name << endl;
-				//cout << cl << endl;
-				//cout << phoneNumber << endl;
-				//cout << birthday << endl;
-				//cout << certi << endl;
 			}
 			else if (cmdPacket.cmd.compare("DEL") == 0) {
 				OptionType option1 = Parser::ParseOption(cmdPacket.option1);
@@ -64,14 +55,6 @@ int main(int argc, char* argv[]) {
 				string keyData = cmdPacket.data2;
 
 				deleter->Delete(option1, option2, keyType, keyData);
-
-				// for debug
-				//cout << "--------------------------" << endl;
-				//cout << "DELETED" << endl;
-				//cout << (int)(option1) << endl;
-				//cout << (int)option2 << endl;
-				//cout << (int)keyType << endl;
-				//cout << keyData << endl;
 			}
 			else if (cmdPacket.cmd.compare("SCH") == 0) {
 				OptionType option1 = Parser::ParseOption(cmdPacket.option1);
@@ -80,15 +63,6 @@ int main(int argc, char* argv[]) {
 				string keyData = cmdPacket.data2;
 
 				searcher->Search(keyType, keyData, option1, option2);
-
-				//// for debug
-				//cout << "--------------------------" << endl;
-				//cout << "SEARCHED" << endl;
-				//cout << (int)(option1) << endl;
-				//cout << (int)option2 << endl;
-				//cout << (int)keyType << endl;
-				//cout << keyData << endl;
-
 			}
 			else if (cmdPacket.cmd.compare("MOD") == 0) {
 				OptionType option1 = Parser::ParseOption(cmdPacket.option1);
@@ -99,26 +73,15 @@ int main(int argc, char* argv[]) {
 				string modData = cmdPacket.data4;
 
 				modifier->Modify(keyType, keyData, modType, modData, option1, option2);
-
-				// for debug
-				//cout << "--------------------------" << endl;
-				//cout << "MODIFIED" << endl;
-				//cout << (int)(option1) << endl;
-				//cout << (int)option2 << endl;
-				//cout << (int)keyType << endl;
-				//cout << keyData << endl;
-				//cout << (int)modType << endl;
-				//cout << modData << endl;
-
 			}
 			else {
-				cout << "[Fail] wrong command input" << endl;
+				// cout << "[Fail] wrong command input" << endl;
 				break;
 			}
 		}
 	}
 	else {
-		cout << "[Fail] File does not exists" << endl;
+		// cout << "[Fail] File does not exists" << endl;
 	}
 
 	ifs.close();

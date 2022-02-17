@@ -2,16 +2,16 @@
 #include <algorithm>
 #include <iostream>
 
-#include "DataBase.h"
-#include "Printer.h"
+#include "IDataBase.h"
+#include "IPrinter.h"
 #include "DataStructure.h"
 #include "Parser.h"
 
 class Modifier
 {
 public:
-	Modifier(DataBase* dataBase, Printer* m_printer);
+	Modifier(IDataBase* dataBase, IPrinter* m_printer);
 	bool Modify(KeyType condType, string condData, KeyType modType, string modData, OptionType option1, OptionType option2);
-	DataBase* m_dataBase;
-	Printer* m_printer;
+	IDataBase* m_dataBase;
+	IPrinter* m_printer;
 };

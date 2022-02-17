@@ -2,7 +2,20 @@
 #include "../EmployeeDB/Parser.h"
 #include"../EmployeeDB/DataStructure.h"
 
-TEST(ParserTest, ParseCmdLineTest) {
+using namespace testing;
+
+class ParserTest : public testing::Test
+{
+protected:
+	void SetUp(void) override {
+
+	}
+
+	void TearDown(void) override {
+
+	}
+};
+TEST_F(ParserTest, ParseCmdLineTest) {
 	string str = "ADD, , , ,15123099,VXIHXOTH JHOP,CL3,010-3112-2609,19771211,ADV";
 
 	CmdPacket cmdPacket;
@@ -20,7 +33,7 @@ TEST(ParserTest, ParseCmdLineTest) {
 	EXPECT_EQ(0, cmdPacket.data6.compare("ADV"));
 }
 
-TEST(ParserTest, ParseNameTest) {
+TEST_F(ParserTest, ParseNameTest) {
 	string str = "VXIHXOTH JHOP";
 
 	string firstName;
@@ -31,7 +44,7 @@ TEST(ParserTest, ParseNameTest) {
 	EXPECT_EQ(0, lastName.compare("JHOP"));
 }
 
-TEST(ParserTest, ParsePhoneNumTest) {
+TEST_F(ParserTest, ParsePhoneNumTest) {
 	string str = "010-3112-2609";
 
 	string middlePhoneNum;
@@ -42,7 +55,7 @@ TEST(ParserTest, ParsePhoneNumTest) {
 	EXPECT_EQ(0, lastPhoneNum.compare("2609"));
 }
 
-TEST(ParserTest, ParseBirthDayTest) {
+TEST_F(ParserTest, ParseBirthDayTest) {
 	string str = "19771211";
 
 	string year;
@@ -56,7 +69,7 @@ TEST(ParserTest, ParseBirthDayTest) {
 
 }
 
-TEST(ParserTest, ParseOptionTest) {
+TEST_F(ParserTest, ParseOptionTest) {
 	string str = "-p";
 
 	OptionType optionType = Parser::ParseOption(str);
@@ -64,7 +77,7 @@ TEST(ParserTest, ParseOptionTest) {
 	EXPECT_EQ(OptionType::p, optionType);
 }
 
-TEST(ParserTest, SortEmployeeTest) {
+TEST_F(ParserTest, SortEmployeeTest) {
 	
 	vector<Employee> employVec;
 
@@ -95,7 +108,7 @@ TEST(ParserTest, SortEmployeeTest) {
 	EXPECT_EQ(0, youngestEmployee.employeeNum.compare("21999999"));
 }
 
-TEST(ParserTest, TranslateKeyTypeTest) {
+TEST_F(ParserTest, TranslateKeyTypeTest) {
 
 	KeyType keyType;
 
@@ -118,7 +131,7 @@ TEST(ParserTest, TranslateKeyTypeTest) {
 	EXPECT_EQ(KeyType::Certi, keyType);
 }
 
-TEST(ParserTest, ChangeConditionTest) {
+TEST_F(ParserTest, ChangeConditionTest) {
 	
 	EXPECT_EQ(KeyType::FirstName, Parser::ChangeCondition(KeyType::Name, OptionType::f));
 	EXPECT_EQ(KeyType::LastName, Parser::ChangeCondition(KeyType::Name, OptionType::l));

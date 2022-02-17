@@ -31,7 +31,7 @@ bool compare(Employee a, Employee b) {
 		greator = true;
 	}
 	else {
-		cout << "[Fail] wrong EmployNum Range" << endl;
+		// cout << "[Fail] wrong EmployNum Range" << endl;
 	}
 
 	return greator;
@@ -79,7 +79,7 @@ void Parser::ParseCmdLine(string line, OUT CmdPacket& cmdPacket) {
 			cmdPacket.data6 = word;
 		}
 		else {
-			cout << "[Fail] intput data Cmd format error" << endl;
+			// cout << "[Fail] intput data Cmd format error" << endl;
 		}
 
 		wordIndex++;
@@ -101,7 +101,7 @@ void Parser::ParseName(string name, OUT string& firstName, string& lastName) {
 			lastName = word;
 		}
 		else {
-			cout << "[Fail] intput data Name format error" << endl;
+			// cout << "[Fail] intput data Name format error" << endl;
 		}
 		wordIndex++;
 	}
@@ -125,7 +125,7 @@ void Parser::ParsePhoneNum(string phoneNum, OUT string& middlePhoneNum, OUT stri
 			lastPhoneNum = word;
 		}
 		else {
-			cout << "[Fail] intput data PhoneNum format error" << endl;
+			// cout << "[Fail] intput data PhoneNum format error" << endl;
 		}
 		wordIndex++;
 	}
@@ -147,7 +147,7 @@ void Parser::ParseBirthDay(string birthDay, OUT string& year, OUT string& month,
 			day += ch;
 		}
 		else {
-			cout << "[Fail] intput data BirthDay format error" << endl;
+			// cout << "[Fail] intput data BirthDay format error" << endl;
 		}
 	}
 }
@@ -178,7 +178,7 @@ OptionType Parser::ParseOption(string option) {
 		optionType = OptionType::none;
 	}
 	else {
-		cout << "[Fail] intput data Option format error" << endl;
+		// cout << "[Fail] intput data Option format error" << endl;
 	}
 
 	return optionType;
@@ -210,7 +210,7 @@ KeyType Parser::TranslateKeyType(string keyname) {
 		keyType = KeyType::Certi;
 	}
 	else {
-		cout << "[Fail] wrong key name" << endl;
+		// cout << "[Fail] wrong key name" << endl;
 	}
 
 	return keyType;

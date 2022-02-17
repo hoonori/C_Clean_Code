@@ -3,7 +3,7 @@
 #include "DataStructure.h"
 #include "Parser.h"
 
-Adder::Adder(DataBase* dataBase) {
+Adder::Adder(IDataBase* dataBase) {
 	m_dataBase = dataBase;
 }
 

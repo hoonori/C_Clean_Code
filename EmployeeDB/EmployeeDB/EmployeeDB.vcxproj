@@ -142,6 +142,7 @@
     <ClCompile Include="Adder.cpp" />
     <ClCompile Include="DataBase.cpp" />
     <ClCompile Include="Deleter.cpp" />
+    <ClCompile Include="IDataBase.h" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Modifier.cpp" />
     <ClCompile Include="Parser.cpp" />
@@ -153,6 +154,7 @@
     <ClInclude Include="DataBase.h" />
     <ClInclude Include="DataStructure.h" />
     <ClInclude Include="Deleter.h" />
+    <ClInclude Include="IPrinter.h" />
     <ClInclude Include="Modifier.h" />
     <ClInclude Include="Parser.h" />
     <ClInclude Include="Printer.h" />

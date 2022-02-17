@@ -5,166 +5,124 @@
 #include "../EmployeeDB/Printer.h"
 #include "../EmployeeDB/Parser.h"
 
+#include "MockPrinter.h"
 
+using namespace testing;
 
-TEST(DeleteTest, BasicTest) {
-	DataBase* database = new DataBase();
-	ofstream ofs;
-
-	string outFileName = "output_test.txt";
-	ofs.open(outFileName);
-
-	Printer* printer = new Printer(&ofs);
-	Deleter deleter(database, printer);
-
-	Employee list[7];
-	list[0] = {true, "00000000", "JIHOON KIM", "CL2", "010-0000-0000", "970319", "PRO"};
-	list[1] = {true, "00000001", "DONGWOO KIM", "CL2", "010-0000-0001", "970320", "PRO"};
-	list[2] = {true, "00000002", "JOONGHYUN KIM", "CL2", "010-0000-0002", "970321", "PRO"};
-	list[3] = {true, "00000003", "DONGIL LEE", "CL3", "010-0000-0003", "970322", "PRO"};
-	list[4] = {true, "00000004", "SEUNGJI GWAK", "CL4", "010-0000-0004", "970323", "PRO"};
-	list[5] = {true, "00000005", "YOUNGDOO KIM", "CL3", "010-0000-0005", "970324", "PRO"};
-	list[6] = {true, "00000006", "JUNSEOK YANG", "CL4", "010-0000-0006", "970325", "EX"};
-
-	for (int i = 0; i < 7; i++)
-	{
-		database->CreateRecord(list[i]);
-	}
-	
-	EXPECT_EQ(deleter.Delete(OptionType::none, OptionType::none, KeyType::EmployeeNum, list[0].employeeNum), 1);
-	EXPECT_EQ(deleter.Delete(OptionType::none, OptionType::none, KeyType::Name, list[1].name), 1);
-	EXPECT_EQ(deleter.Delete(OptionType::none, OptionType::none, KeyType::Cl, list[2].cl), 1);
-	EXPECT_EQ(deleter.Delete(OptionType::none, OptionType::none, KeyType::PhoneNum, list[3].phoneNum), 1);
-	EXPECT_EQ(deleter.Delete(OptionType::none, OptionType::none, KeyType::Birthday, list[4].birthday), 1);
-	EXPECT_EQ(deleter.Delete(OptionType::none, OptionType::none, KeyType::Certi, list[5].certi), 1);
-	ofs.close();
-	std::remove(outFileName.c_str());
-}
-
-
-TEST(DeleteTest, Option2Test) {
-	DataBase* database = new DataBase();
-	ofstream ofs;
-
-	string outFileName = "output_test.txt";
-	ofs.open(outFileName);
-
-	Printer* printer = new Printer(&ofs);
-	Deleter deleter(database, printer);
-
-	Employee list[7];
-	list[0] = { true, "00000000", "JIHOON KIM", "CL2", "010-0000-0000", "970319", "PRO", "JIHOON", "KIM", "0000", "0000", "97", "03", "19"};
-	list[1] = { true, "00000001", "DONGWOO PARK", "CL2", "010-0000-0001", "970320", "PRO", "DONGWOO", "PARK", "0000", "0001", "97", "03", "20" };
-	list[2] = { true, "00000002", "JOONGHYUN KIM", "CL2", "010-0010-0002", "970321", "PRO", "JOONGHYUN", "KIM", "0010", "0002", "97", "03", "21" };
-	list[3] = { true, "00000003", "DONGIL LEE", "CL3", "010-0000-0003", "970322", "PRO", "DONGIL", "LEE", "0000", "0003", "97", "03", "22" };
-	list[4] = { true, "00000004", "SEUNGJI GWAK", "CL4", "010-0000-0004", "970323", "PRO", "SEUNGJI", "GWAK", "0000", "0004", "97", "03", "23" };
-	list[5] = { true, "00000005", "YOUNGDOO KIM", "CL3", "010-0000-0005", "980424", "PRO", "YOUNGDOO", "KIM", "0000", "0005", "98", "04", "24" };
-	list[6] = { true, "00000006", "JUNSEOK YANG", "CL4", "010-0000-0006", "990525", "EX", "JUNSEOK", "YANG", "0000", "0006", "99", "05", "25" };
-
-	for (int i = 0; i < 7; i++)
-	{
-		database->CreateRecord(list[i]);
-	}
-
-	EXPECT_EQ(deleter.Delete(OptionType::none, OptionType::f, KeyType::Name,"JIHOON"),1);
-	EXPECT_EQ(deleter.Delete(OptionType::none, OptionType::l, KeyType::Name, "PARK"), 1);
-
-	EXPECT_EQ(deleter.Delete(OptionType::none, OptionType::m, KeyType::PhoneNum, "0010"), 1);
-	EXPECT_EQ(deleter.Delete(OptionType::none, OptionType::l, KeyType::PhoneNum, "0003"), 1);
-
-	EXPECT_EQ(deleter.Delete(OptionType::none, OptionType::y, KeyType::Birthday, "97"), 1);
-	EXPECT_EQ(deleter.Delete(OptionType::none, OptionType::m, KeyType::Birthday, "04"), 1);
-	EXPECT_EQ(deleter.Delete(OptionType::none, OptionType::d, KeyType::Birthday, "25"), 1);
-	ofs.close();
-	std::remove(outFileName.c_str());
-}
-
-
-
-TEST(DeleteTest, Option1Test)
+class DeleterTest : public testing::Test
 {
-	DataBase* database = new DataBase();
+protected:
+	void SetUp(void) override {
+		database = new DataBase();
+		mockPrinter = new MockPrinter();
+		deleter = new Deleter(database, mockPrinter);
 
-	ofstream ofs;
+		list[0] = { true, "00000000", "JIHOON KIM", "CL2", "010-0000-0000", "19970319", "PRO", "JIHOON", "KIM", "0000", "0000", "1997", "03", "19" };
+		list[1] = { true, "00000001", "DONGWOO PARK", "CL2", "010-0000-0001", "19970320", "PRO", "DONGWOO", "PARK", "0000", "0001", "1997", "03", "20" };
+		list[2] = { true, "00000002", "JOONGHYUN KIM", "CL2", "010-0010-0002", "19970321", "PRO", "JOONGHYUN", "KIM", "0010", "0002", "1997", "03", "21" };
+		list[3] = { true, "00000003", "DONGIL LEE", "CL3", "010-0000-0003", "19970322", "PRO", "DONGIL", "LEE", "0000", "0003", "97", "1903", "22" };
+		list[4] = { true, "00000004", "SEUNGJI GWAK", "CL4", "010-0000-0004", "19970323", "PRO", "SEUNGJI", "GWAK", "0000", "0004", "1997", "03", "23" };
+		list[5] = { true, "00000005", "YOUNGDOO KIM", "CL3", "010-0000-0005", "19980424", "PRO", "YOUNGDOO", "KIM", "0000", "0005", "1998", "04", "24" };
+		list[6] = { true, "00000006", "JUNSEOK YANG", "CL4", "010-0000-0006", "19990525", "EX", "JUNSEOK", "YANG", "0000", "0006", "1999", "05", "25" };
 
-	string outFileName = "output_test.txt";
-	ofs.open(outFileName);
+		for (int i = 0; i < 7; i++)
+		{
+			database->CreateRecord(list[i]);
+		}
+	}
 
-	Printer* printer = new Printer(&ofs);
-	Deleter deleter(database, printer);
+	void TearDown(void) override {
+		delete database;
+		delete mockPrinter;
+		delete deleter;
+	}
+
+	DataBase* database;
+	Deleter* deleter;
+	MockPrinter* mockPrinter;
 
 	Employee list[7];
-	list[0] = { true, "69000000", "JIHOON KIM", "CL2", "010-0000-0000", "970319", "PRO", "JIHOON", "KIM", "0000", "0000", "97", "03", "19" };
-	list[1] = { true, "69000001", "DONGWOO PARK", "CL2", "010-0000-0001", "970320", "PRO", "DONGWOO", "PARK", "0000", "0001", "97", "03", "20" };
-	list[2] = { true, "70000002", "JOONGHYUN KIM", "CL2", "010-0010-0002", "970321", "PRO", "JOONGHYUN", "KIM", "0010", "0002", "97", "03", "21" };
-	list[3] = { true, "70000003", "DONGIL LEE", "CL2", "010-0000-0003", "970322", "PRO", "DONGIL", "LEE", "0000", "0003", "97", "03", "22" };
-	list[4] = { true, "19000004", "SEUNGJI GWAK", "CL2", "010-0000-0004", "970323", "PRO", "SEUNGJI", "GWAK", "0000", "0004", "97", "03", "23" };
-	list[5] = { true, "20000005", "YOUNGDOO KIM", "CL2", "010-0000-0005", "980424", "PRO", "YOUNGDOO", "KIM", "0000", "0005", "98", "04", "24" };
-	list[6] = { true, "21000006", "JUNSEOK YANG", "CL2", "010-0000-0006", "990525", "EX", "JUNSEOK", "YANG", "0000", "0006", "99", "05", "25" };
 
-	for (int i = 0; i < 7; i++)
-	{
-		database->CreateRecord(list[i]);
-	}
+};
+TEST_F(DeleterTest, BasicTest) {
+	
+	EXPECT_CALL(*mockPrinter, PrintRecord("DEL", _, _, _, _, _, _)).Times(0);
+	EXPECT_CALL(*mockPrinter, PrintNone("DEL")).Times(1);
+	EXPECT_CALL(*mockPrinter, PrintCount("DEL", _)).Times(6);
 
-	EXPECT_EQ(7,deleter.Delete(OptionType::p, OptionType::none, KeyType::Cl, "CL2"));
-	EXPECT_EQ(0,deleter.Delete(OptionType::p, OptionType::none, KeyType::Cl, "CL2"));
+	int res0 = deleter->Delete(OptionType::none, OptionType::none, KeyType::EmployeeNum, "99999999");
+	EXPECT_EQ(res0, 0);
 
-	string expected1 = "DEL,69000000,JIHOON KIM,CL2,010-0000-0000,970319,PRO";
-	string expected2 = "DEL,69000001,DONGWOO PARK,CL2,010-0000-0001,970320,PRO";
-	string expected3 = "DEL,70000002,JOONGHYUN KIM,CL2,010-0010-0002,970321,PRO";
-	string expected4 = "DEL,70000003,DONGIL LEE,CL2,010-0000-0003,970322,PRO";
-	string expected5 = "DEL,19000004,SEUNGJI GWAK,CL2,010-0000-0004,970323,PRO";
-	string expected6 = "DEL,NONE";
-	ofs.close();
+	int res1 = deleter->Delete(OptionType::none, OptionType::none, KeyType::EmployeeNum, list[0].employeeNum);
+	EXPECT_EQ(res1, 1);
 
-	ifstream ifs;
+	int res2 = deleter->Delete(OptionType::none, OptionType::none, KeyType::Name, list[1].name);
+	EXPECT_EQ(res2, 1);
 
-	ifs.open(outFileName);
+	int res3 = deleter->Delete(OptionType::none, OptionType::none, KeyType::Cl, list[2].cl);
+	EXPECT_EQ(res3, 1);
 
-	string line;
+	int res4 = deleter->Delete(OptionType::none, OptionType::none, KeyType::PhoneNum, list[3].phoneNum);
+	EXPECT_EQ(res4, 1);
 
-	string res1;
-	string res2;
-	string res3;
-	string res4;
-	string res5;
-	string res6;
+	int res5 = deleter->Delete(OptionType::none, OptionType::none, KeyType::Birthday, list[4].birthday);
+	EXPECT_EQ(res5, 1);
 
+	int res6 = deleter->Delete(OptionType::none, OptionType::none, KeyType::Certi, list[5].certi);
+	EXPECT_EQ(res6, 1);
 
-	int index = 0;
-	while (getline(ifs, line)) {
-		if (index == 0) {
-			res1 = line;
-		}
-		else if (index == 1) {
-			res2 = line;
-		}
-		else if (index == 2) {
-			res3 = line;
-		}
-		else if (index == 3) {
-			res4 = line;
-		}
-		else if (index == 4) {
-			res5 = line;
-		}
-		else if (index == 5) {
-			res6 = line;
-		}
-
-		index++;
-	}
-
-	EXPECT_EQ(0, res1.compare(expected1));
-	EXPECT_EQ(0, res2.compare(expected2));
-	EXPECT_EQ(0, res3.compare(expected3));
-	EXPECT_EQ(0, res4.compare(expected4));
-	EXPECT_EQ(0, res5.compare(expected5));
-	EXPECT_EQ(0, res6.compare(expected6));
-	EXPECT_EQ(res6, expected6);
-
-
-	ifs.close();
-	std::remove(outFileName.c_str());
 }
+
+
+TEST_F(DeleterTest, Option1Test)
+{
+	EXPECT_CALL(*mockPrinter, PrintRecord("DEL", _, _, _, _, _, _)).Times(7);
+	EXPECT_CALL(*mockPrinter, PrintNone("DEL")).Times(1);
+	EXPECT_CALL(*mockPrinter, PrintCount("DEL", _)).Times(0);
+
+	int res0 = deleter->Delete(OptionType::p, OptionType::none, KeyType::Cl, "CL2");
+	EXPECT_EQ(res0, 3);
+	
+	int res1 = deleter->Delete(OptionType::p, OptionType::none, KeyType::Certi, "PRO");
+	EXPECT_EQ(res1, 3);
+
+	int res2 = deleter->Delete(OptionType::p, OptionType::none, KeyType::Cl, "CL4");
+	EXPECT_EQ(res2, 1);
+
+	int res3 = deleter->Delete(OptionType::p, OptionType::none, KeyType::Cl, "CL3");
+	EXPECT_EQ(res3, 0);
+
+}
+TEST_F(DeleterTest, Option2Test) {
+
+
+	EXPECT_CALL(*mockPrinter, PrintRecord("DEL", _, _, _, _, _, _)).Times(0);
+	EXPECT_CALL(*mockPrinter, PrintNone("DEL")).Times(1);
+	EXPECT_CALL(*mockPrinter, PrintCount("DEL", _)).Times(7);
+
+	int res0 = deleter->Delete(OptionType::none, OptionType::f, KeyType::Name, "JIHOON");
+	EXPECT_EQ(res0, 1);
+
+	int res1 = deleter->Delete(OptionType::none, OptionType::f, KeyType::Name, "JIHOON");
+	EXPECT_EQ(res1, 0);
+
+	int res2 = deleter->Delete(OptionType::none, OptionType::l, KeyType::Name, "PARK");
+	EXPECT_EQ(res2, 1);
+
+	int res3 = deleter->Delete(OptionType::none, OptionType::m, KeyType::PhoneNum, "0010");
+	EXPECT_EQ(res3, 1);
+
+	int res4 = deleter->Delete(OptionType::none, OptionType::l, KeyType::PhoneNum, "0003");
+	EXPECT_EQ(res4, 1);
+
+	int res5 = deleter->Delete(OptionType::none, OptionType::y, KeyType::Birthday, "1997");
+	EXPECT_EQ(res5, 1);
+
+	int res6 = deleter->Delete(OptionType::none, OptionType::m, KeyType::Birthday, "04");
+	EXPECT_EQ(res6, 1);
+
+	int res7 = deleter->Delete(OptionType::none, OptionType::d, KeyType::Birthday, "25");
+	EXPECT_EQ(res7, 1);
+
+}
+
