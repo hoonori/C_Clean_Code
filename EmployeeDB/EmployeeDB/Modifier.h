@@ -5,12 +5,13 @@
 #include "DataBase.h"
 #include "Printer.h"
 #include "DataStructure.h"
+#include "Parser.h"
 
 class Modifier
 {
 public:
-	Modifier(DataBase* dataBase);
-	bool Modify(KeyType condType, string condData, KeyType modType, string modData, char option1, char option2, char option3);
+	Modifier(DataBase* dataBase, Printer* m_printer);
+	bool Modify(KeyType condType, string condData, KeyType modType, string modData, OptionType option1, OptionType option2);
 	DataBase* m_dataBase;
-	bool employeeSort(const int& index1, const int& index2);
+	Printer* m_printer;
 };
