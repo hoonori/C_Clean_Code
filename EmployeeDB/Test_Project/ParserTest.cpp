@@ -117,3 +117,17 @@ TEST(ParserTest, TranslateKeyTypeTest) {
 	keyType = Parser::TranslateKeyType("certi");
 	EXPECT_EQ(KeyType::Certi, keyType);
 }
+
+TEST(ParserTest, ChangeConditionTest) {
+	
+	EXPECT_EQ(KeyType::FirstName, Parser::ChangeCondition(KeyType::Name, OptionType::f));
+	EXPECT_EQ(KeyType::LastName, Parser::ChangeCondition(KeyType::Name, OptionType::l));
+
+	EXPECT_EQ(KeyType::MiddlePhoneNum, Parser::ChangeCondition(KeyType::PhoneNum, OptionType::m));
+	EXPECT_EQ(KeyType::LastPhoneNum, Parser::ChangeCondition(KeyType::PhoneNum, OptionType::l));
+
+
+	EXPECT_EQ(KeyType::YearBirth, Parser::ChangeCondition(KeyType::Birthday, OptionType::y));
+	EXPECT_EQ(KeyType::MonthBirth, Parser::ChangeCondition(KeyType::Birthday, OptionType::m));
+	EXPECT_EQ(KeyType::DayBirth, Parser::ChangeCondition(KeyType::Birthday, OptionType::d));
+}
