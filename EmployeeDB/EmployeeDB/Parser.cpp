@@ -217,5 +217,20 @@ KeyType Parser::TranslateKeyType(string keyname) {
 }
 
 KeyType Parser::ChangeCondition(KeyType key, OptionType option) {
+	if (option == OptionType::f && key == KeyType::Name)
+		key = KeyType::FirstName;
+	else if (option == OptionType::l && key == KeyType::Name)
+		key = KeyType::LastName;
+	else if (option == OptionType::m && key == KeyType::PhoneNum)
+		key = KeyType::MiddlePhoneNum;
+	else if (option == OptionType::l && key == KeyType::PhoneNum)
+		key = KeyType::LastPhoneNum;
+	else if (option == OptionType::y && key == KeyType::Birthday)
+		key = KeyType::YearBirth;
+	else if (option == OptionType::m && key == KeyType::Birthday)
+		key = KeyType::MonthBirth;
+	else if (option == OptionType::d && key == KeyType::Birthday)
+		key = KeyType::DayBirth;
+
 	return key;
 }
