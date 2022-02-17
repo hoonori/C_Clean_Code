@@ -94,3 +94,26 @@ TEST(ParserTest, SortEmployeeTest) {
 	EXPECT_EQ(0, oldestEmployee.employeeNum.compare("69000000"));
 	EXPECT_EQ(0, youngestEmployee.employeeNum.compare("21999999"));
 }
+
+TEST(ParserTest, TranslateKeyTypeTest) {
+
+	KeyType keyType;
+
+	keyType = Parser::TranslateKeyType("employeeNum");
+	EXPECT_EQ(KeyType::EmployeeNum, keyType);
+
+	keyType = Parser::TranslateKeyType("name");
+	EXPECT_EQ(KeyType::Name, keyType);
+
+	keyType = Parser::TranslateKeyType("cl");
+	EXPECT_EQ(KeyType::Cl, keyType);
+
+	keyType = Parser::TranslateKeyType("phoneNum");
+	EXPECT_EQ(KeyType::PhoneNum, keyType);
+
+	keyType = Parser::TranslateKeyType("birthday");
+	EXPECT_EQ(KeyType::Birthday, keyType);
+
+	keyType = Parser::TranslateKeyType("certi");
+	EXPECT_EQ(KeyType::Certi, keyType);
+}

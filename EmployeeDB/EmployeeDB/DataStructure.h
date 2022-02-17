@@ -51,6 +51,8 @@ enum class KeyType {
 	YearBirth,
 	MonthBirth,
 	DayBirth,
+
+	Count,
 };
 
 enum class OptionType {
@@ -61,4 +63,6 @@ enum class OptionType {
 	y,
 	d,
 	none,
+
+	Count,
 };

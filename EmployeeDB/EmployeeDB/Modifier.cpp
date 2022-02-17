@@ -26,10 +26,6 @@ bool Modifier::Modify(KeyType condType, string condData, KeyType modType, string
 		condTypeWithOption = KeyType::MonthBirth;
 	else if (option2 == OptionType::d && condType == KeyType::Birthday)
 		condTypeWithOption = KeyType::DayBirth;
-	else if (option2 == OptionType:: none) {
-		cout << "get invalid option" << endl;
-		return false;
-	}
 
 	vector<int> indexVec = m_dataBase->FindMapAll(condTypeWithOption, condData);
 	

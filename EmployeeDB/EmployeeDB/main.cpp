@@ -26,7 +26,7 @@ int main(int argc, char* argv[]) {
 	Parser* parser = new Parser;
 	DataBase* database = new DataBase();
 	Adder* adder = new Adder(database);
-	Deleter* deleter = new Deleter(database);
+	Deleter* deleter = new Deleter(database, printer);
 	Searcher* searcher = new Searcher(database, printer);
 	Modifier* modifier = new Modifier(database, printer);
 
@@ -46,14 +46,69 @@ int main(int argc, char* argv[]) {
 				string certi = cmdPacket.data6;
 
 				adder->Add(employNum, name, cl, phoneNumber, birthday, certi);
+
+				// for debug
+				//cout << "--------------------------" << endl;
+				//cout << "ADDED" << endl;
+				//cout << employNum << endl;
+				//cout << name << endl;
+				//cout << cl << endl;
+				//cout << phoneNumber << endl;
+				//cout << birthday << endl;
+				//cout << certi << endl;
 			}
 			else if (cmdPacket.cmd.compare("DEL") == 0) {
+				OptionType option1 = Parser::ParseOption(cmdPacket.option1);
+				OptionType option2 = Parser::ParseOption(cmdPacket.option2);
+				KeyType keyType = Parser::TranslateKeyType(cmdPacket.data1);
+				string keyData = cmdPacket.data2;
 
+				deleter->Delete(option1, option2, keyType, keyData);
+
+				// for debug
+				//cout << "--------------------------" << endl;
+				//cout << "DELETED" << endl;
+				//cout << (int)(option1) << endl;
+				//cout << (int)option2 << endl;
+				//cout << (int)keyType << endl;
+				//cout << keyData << endl;
 			}
 			else if (cmdPacket.cmd.compare("SCH") == 0) {
+				OptionType option1 = Parser::ParseOption(cmdPacket.option1);
+				OptionType option2 = Parser::ParseOption(cmdPacket.option2);
+				KeyType keyType = Parser::TranslateKeyType(cmdPacket.data1);
+				string keyData = cmdPacket.data2;
+
+				searcher->Search(keyType, keyData, option1, option2);
+
+				//// for debug
+				//cout << "--------------------------" << endl;
+				//cout << "SEARCHED" << endl;
+				//cout << (int)(option1) << endl;
+				//cout << (int)option2 << endl;
+				//cout << (int)keyType << endl;
+				//cout << keyData << endl;
 
 			}
 			else if (cmdPacket.cmd.compare("MOD") == 0) {
+				OptionType option1 = Parser::ParseOption(cmdPacket.option1);
+				OptionType option2 = Parser::ParseOption(cmdPacket.option2);
+				KeyType keyType = Parser::TranslateKeyType(cmdPacket.data1);
+				string keyData = cmdPacket.data2;
+				KeyType modType = Parser::TranslateKeyType(cmdPacket.data3);
+				string modData = cmdPacket.data4;
+
+				modifier->Modify(keyType, keyData, modType, modData, option1, option2);
+
+				// for debug
+				//cout << "--------------------------" << endl;
+				//cout << "MODIFIED" << endl;
+				//cout << (int)(option1) << endl;
+				//cout << (int)option2 << endl;
+				//cout << (int)keyType << endl;
+				//cout << keyData << endl;
+				//cout << (int)modType << endl;
+				//cout << modData << endl;
 
 			}
 			else {
@@ -65,5 +120,8 @@ int main(int argc, char* argv[]) {
 	else {
 		cout << "[Fail] File does not exists" << endl;
 	}
+
+	ifs.close();
+	ofs.close();
 	return 0;
 }
