@@ -60,4 +60,5 @@ enum class OptionType {
 	m, // middle phoneNum, month
 	y,
 	d,
+	none,
 };

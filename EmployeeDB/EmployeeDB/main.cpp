@@ -28,7 +28,7 @@ int main(int argc, char* argv[]) {
 	Adder* adder = new Adder(database);
 	Deleter* deleter = new Deleter(database);
 	Searcher* searcher = new Searcher(database, printer);
-	Modifier* modifier = new Modifier(database);
+	Modifier* modifier = new Modifier(database, printer);
 
 	if (!ifs.fail()) {
 		string line;
