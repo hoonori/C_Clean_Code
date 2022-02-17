@@ -216,3 +216,6 @@ KeyType Parser::TranslateKeyType(string keyname) {
 	return keyType;
 }
 
+KeyType Parser::ChangeCondition(KeyType key, OptionType option) {
+	return key;
+}

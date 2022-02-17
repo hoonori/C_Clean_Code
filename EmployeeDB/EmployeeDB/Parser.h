@@ -16,6 +16,7 @@ public:
 	static OptionType ParseOption(string option);
 	static void SortEmployee(OUT vector<Employee>& employVec);
 	static KeyType TranslateKeyType(string keyname);
+	static KeyType ChangeCondition(KeyType key, OptionType option);
 private:
 };
 
