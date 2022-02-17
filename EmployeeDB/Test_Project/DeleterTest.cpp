@@ -32,12 +32,12 @@ TEST(DeleteTest, BasicTest) {
 		database->CreateRecord(list[i]);
 	}
 	
-	EXPECT_EQ(deleter.Delete(0,0,KeyType::EmployeeNum, list[0].employeeNum), 1);
-	EXPECT_EQ(deleter.Delete(0,0, KeyType::Name, list[1].name), 1);
-	EXPECT_EQ(deleter.Delete(0,0, KeyType::Cl, list[2].cl), 1);
-	EXPECT_EQ(deleter.Delete(0,0, KeyType::PhoneNum, list[3].phoneNum), 1);
-	EXPECT_EQ(deleter.Delete(0,0, KeyType::Birthday, list[4].birthday), 1);
-	EXPECT_EQ(deleter.Delete(0,0, KeyType::Certi, list[5].certi), 1);
+	EXPECT_EQ(deleter.Delete(OptionType::none, OptionType::none, KeyType::EmployeeNum, list[0].employeeNum), 1);
+	EXPECT_EQ(deleter.Delete(OptionType::none, OptionType::none, KeyType::Name, list[1].name), 1);
+	EXPECT_EQ(deleter.Delete(OptionType::none, OptionType::none, KeyType::Cl, list[2].cl), 1);
+	EXPECT_EQ(deleter.Delete(OptionType::none, OptionType::none, KeyType::PhoneNum, list[3].phoneNum), 1);
+	EXPECT_EQ(deleter.Delete(OptionType::none, OptionType::none, KeyType::Birthday, list[4].birthday), 1);
+	EXPECT_EQ(deleter.Delete(OptionType::none, OptionType::none, KeyType::Certi, list[5].certi), 1);
 	ofs.close();
 	std::remove(outFileName.c_str());
 }
@@ -68,15 +68,15 @@ TEST(DeleteTest, Option2Test) {
 		database->CreateRecord(list[i]);
 	}
 
-	EXPECT_EQ(deleter.Delete(0, 'f', KeyType::Name,"JIHOON"),1);
-	EXPECT_EQ(deleter.Delete(0, 'l', KeyType::Name, "PARK"), 1);
+	EXPECT_EQ(deleter.Delete(OptionType::none, OptionType::f, KeyType::Name,"JIHOON"),1);
+	EXPECT_EQ(deleter.Delete(OptionType::none, OptionType::l, KeyType::Name, "PARK"), 1);
 
-	EXPECT_EQ(deleter.Delete(0, 'm', KeyType::PhoneNum, "0010"), 1);
-	EXPECT_EQ(deleter.Delete(0, 'l', KeyType::PhoneNum, "0003"), 1);
+	EXPECT_EQ(deleter.Delete(OptionType::none, OptionType::m, KeyType::PhoneNum, "0010"), 1);
+	EXPECT_EQ(deleter.Delete(OptionType::none, OptionType::l, KeyType::PhoneNum, "0003"), 1);
 
-	EXPECT_EQ(deleter.Delete(0, 'y', KeyType::Birthday, "97"), 1);
-	EXPECT_EQ(deleter.Delete(0, 'm', KeyType::Birthday, "04"), 1);
-	EXPECT_EQ(deleter.Delete(0, 'd', KeyType::Birthday, "25"), 1);
+	EXPECT_EQ(deleter.Delete(OptionType::none, OptionType::y, KeyType::Birthday, "97"), 1);
+	EXPECT_EQ(deleter.Delete(OptionType::none, OptionType::m, KeyType::Birthday, "04"), 1);
+	EXPECT_EQ(deleter.Delete(OptionType::none, OptionType::d, KeyType::Birthday, "25"), 1);
 	ofs.close();
 	std::remove(outFileName.c_str());
 }
@@ -110,8 +110,8 @@ TEST(DeleteTest, Option1Test)
 		database->CreateRecord(list[i]);
 	}
 
-	EXPECT_EQ(7,deleter.Delete('p', 0, KeyType::Cl, "CL2"));
-	EXPECT_EQ(0,deleter.Delete('p', 0, KeyType::Cl, "CL2"));
+	EXPECT_EQ(7,deleter.Delete(OptionType::p, OptionType::none, KeyType::Cl, "CL2"));
+	EXPECT_EQ(0,deleter.Delete(OptionType::p, OptionType::none, KeyType::Cl, "CL2"));
 
 	string expected1 = "DEL,69000000,JIHOON KIM,CL2,010-0000-0000,970319,PRO";
 	string expected2 = "DEL,69000001,DONGWOO PARK,CL2,010-0000-0001,970320,PRO";
