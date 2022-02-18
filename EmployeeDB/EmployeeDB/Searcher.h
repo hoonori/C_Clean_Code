@@ -10,7 +10,6 @@ class Searcher
 public:
 	Searcher(IDataBase* dataBase, IPrinter* printer);
 	bool Search(KeyType keyType, string key, OptionType ot, OptionType ot2);
-	bool isNumber(const string& str);
 
 private:
 	IDataBase* m_dataBase;

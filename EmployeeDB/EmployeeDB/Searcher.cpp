@@ -5,7 +5,6 @@ Searcher::Searcher(IDataBase* dataBase, IPrinter* printer) {
 	m_dataBase = dataBase;
 	m_Printer = printer;
 	m_comm = "SCH";
-	
 }
 
 bool Searcher::CallPrinter(Employee employee)
@@ -17,24 +16,8 @@ bool Searcher::CallPrinter(Employee employee)
 	string birthday = employee.birthday;
 	string certi = employee.certi;
 
-	//printf("%s,%s,%s,%s,%s,%s,%s\n",
-	//	m_comm.c_str(),
-	//	employNum.c_str(),
-	//	name.c_str(),
-	//	cl.c_str(),
-	//	phoneNum.c_str(),
-	//	birthday.c_str(),
-	//	certi.c_str());
 	m_Printer->PrintRecord(m_comm, employNum, name, cl, phoneNum, birthday, certi);
 
-	return true;
-}
-
-bool Searcher::isNumber(const string& str)
-{
-	for (char const& c : str) {
-		if (std::isdigit(c) == 0) return false;
-	}
 	return true;
 }
 
