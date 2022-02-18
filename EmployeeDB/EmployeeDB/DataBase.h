@@ -3,17 +3,17 @@
 #include <vector>
 #include <string>
 
+#include "IDataBase.h"
 #include "DataStructure.h"
 
-class DataBase
+class DataBase : public IDataBase
 {
 public:
-	void CreateRecord(Employee employee);
-	Employee ReadRecord(int index);
-	void UpdateRecord(int index, string data, KeyType keyType);
-	void DeleteRecord(int index);
-
-	vector<int> FindMapAll(KeyType keyType, string key);
+	void CreateRecord(Employee employee) override;
+	Employee ReadRecord(int index) override;
+	void UpdateRecord(int index, string data, KeyType keyType) override;
+	void DeleteRecord(int index) override;
+	vector<int> FindMapAll(KeyType keyType, string key) override;
 private:
 	struct Employee m_memberList[100000];
 

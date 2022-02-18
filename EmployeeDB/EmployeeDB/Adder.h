@@ -1,13 +1,13 @@
 #pragma once
 #include <string>
 
-#include "DataBase.h"
+#include "IDataBase.h"
 
 class Adder
 {
 public:
-	Adder(DataBase* dataBase);
+	Adder(IDataBase* dataBase);
 	void Add(string employeeNum, string name, string cl, string phoneNum, string birthday, string certi);
 private:
-	DataBase* m_dataBase;
+	IDataBase* m_dataBase;
 };

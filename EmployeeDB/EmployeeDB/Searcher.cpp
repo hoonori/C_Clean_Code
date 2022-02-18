@@ -1,7 +1,7 @@
 #include "Searcher.h"
 #include "Parser.h"
 
-Searcher::Searcher(DataBase* dataBase, Printer* printer) {
+Searcher::Searcher(IDataBase* dataBase, IPrinter* printer) {
 	m_dataBase = dataBase;
 	m_Printer = printer;
 	m_comm = "SCH";

@@ -26,6 +26,12 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
+    <ClInclude Include="MockDataBase.h">
+      <Filter>Test</Filter>
+    </ClInclude>
+    <ClInclude Include="MockPrinter.h">
+      <Filter>Test</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

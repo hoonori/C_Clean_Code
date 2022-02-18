@@ -1,6 +1,6 @@
 #include "Modifier.h"
 
-Modifier::Modifier(DataBase* dataBase, Printer* printer) {
+Modifier::Modifier(IDataBase* dataBase, IPrinter* printer) {
 	m_dataBase = dataBase;
 	m_printer = printer;
 }
